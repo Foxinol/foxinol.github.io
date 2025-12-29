@@ -417,48 +417,147 @@
             border: 1px solid rgba(168, 85, 247, 0.2);
         }
 
-        /* Ссылки */
-        .links {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
+        /* === НОВЫЕ СТИЛИ ДЛЯ ПРОЕКТОВ И КАНАЛОВ === */
+        .projects-section, .channels-section, .reputation-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            padding: 25px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-card);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: left;
         }
 
-        .link-btn {
+        .projects-section:hover, .channels-section:hover, .reputation-section:hover {
+            transform: scale(1.02);
+        }
+
+        .section-title {
+            color: var(--accent-primary);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--bg-card);
+            gap: 10px;
+        }
+
+        .section-title i {
+            font-size: 1rem;
+        }
+
+        .project-card, .channel-card, .reputation-card {
+            background: rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border-light);
-            padding: 18px 22px;
-            border-radius: 16px;
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-card);
-            position: relative;
-            overflow: hidden;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
         }
 
-        .link-btn:hover {
+        .project-card:hover, .channel-card:hover, .reputation-card:hover {
             border-color: var(--accent-primary);
-            transform: scale(1.03);
-            box-shadow: var(--shadow-glow), 0 12px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
         }
 
-        .link-btn span {
+        .project-card:last-child, .channel-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-header, .channel-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 12px;
-            font-weight: 500;
+            margin-bottom: 10px;
         }
 
-        .link-btn i {
+        .project-name, .channel-name {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .project-role, .channel-role {
+            font-size: 0.75rem;
             color: var(--accent-primary);
-            width: 20px;
+            background: rgba(168, 85, 247, 0.1);
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .project-description, .channel-description {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .project-links, .channel-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .project-link, .channel-link {
+            color: var(--accent-primary);
+            font-size: 0.8rem;
+            text-decoration: none;
+            padding: 6px 14px;
+            border: 1px solid var(--accent-primary);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .project-link:hover, .channel-link:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        /* Исправленная карточка репутации */
+        .reputation-card {
+            text-align: center;
+            background: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .reputation-title {
             font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 8px;
+        }
+
+        .reputation-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .reputation-link {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            font-size: 0.85rem;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 1px solid var(--success);
+        }
+
+        .reputation-link:hover {
+            background: rgba(16, 185, 129, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
         }
 
         /* Новогодняя секция с видео-фоном и RGB анимацией */
@@ -747,7 +846,8 @@
                 height: 120px;
             }
             
-            .link-btn, .guarantor-info, .info-section, .faq-section, .new-year-section {
+            .guarantor-info, .info-section, .faq-section, .new-year-section,
+            .projects-section, .channels-section, .reputation-section {
                 padding: 16px;
             }
             
@@ -767,16 +867,15 @@
             .wallet-box {
                 padding: 14px;
             }
+            
+            .project-card, .channel-card, .reputation-card {
+                padding: 14px;
+            }
         }
 
         @media (max-width: 350px) {
             h1 {
                 font-size: 1.8rem;
-            }
-            
-            .link-btn {
-                padding: 14px;
-                font-size: 0.9rem;
             }
             
             .timer {
@@ -913,30 +1012,78 @@
             </div>
         </div>
 
-        <div class="links section">
-            <a href="https://t.me/pixelrare" target="_blank" class="link-btn">
-                <span><i class="fas fa-shopping-cart"></i> CodePlen | Best Shop</span>
-            </a>
+        <!-- Секция проектов -->
+        <div class="projects-section section">
+            <h2 class="section-title"><i class="fas fa-rocket"></i> Проекты</h2>
             
-            <a href="https://t.me/bypasstype" target="_blank" class="link-btn">
-                <span><i class="fas fa-globe"></i> Байпасс | ВПН</span>
-            </a>
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-name">Шоп - Telegram магазин</div>
+                    <div class="project-role">ВЛАДЕЛЕЦ</div>
+                </div>
+                <div class="project-description">Telegram магазин с различными товарами.</div>
+                <div class="project-links">
+                    <a href="https://t.me/pixelrare" target="_blank" class="project-link">ПЕРЕЙТИ</a>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <div class="project-name">Clarity</div>
+                    <div class="project-role">РАЗРАБОТЧИК • ВЛАДЕЛЕЦ</div>
+                </div>
+                <div class="project-description">Telegram Userbot Clarity - инструмент для работы с командами и Telegram API.</div>
+                <div class="project-links">
+                    <a href="https://t.me/ClarityOfficial" target="_blank" class="project-link">ПЕРЕЙТИ</a>
+                </div>
+            </div>
+        </div>
 
-            <a href="https://t.me/HolyDaySex" target="_blank" class="link-btn">
-                <span><i class="fas fa-music"></i> Музыка</span>
-            </a>
+        <!-- Секция каналов -->
+        <div class="channels-section section">
+            <h2 class="section-title"><i class="fas fa-broadcast-tower"></i> Каналы</h2>
+            
+            <div class="channel-card">
+                <div class="project-header">
+                    <div class="channel-name">Osint канал</div>
+                    <div class="channel-role">ИНФОРМАЦИЯ</div>
+                </div>
+                <div class="channel-description">Посвящён сфере Osint и показывает какие данные могут быть в открытом доступе, проще говоря, с пастами.</div>
+                <div class="channel-links">
+                    <a href="https://t.me/+0HTJLxYkbpEyNWYy" target="_blank" class="channel-link">ПЕРЕЙТИ</a>
+                </div>
+            </div>
+            
+            <div class="channel-card">
+                <div class="project-header">
+                    <div class="channel-name">Trolling канал</div>
+                    <div class="channel-role">РАЗВЛЕЧЕНИЯ</div>
+                </div>
+                <div class="channel-description">Посты про сферу троллинга и шаблоны.</div>
+                <div class="channel-links">
+                    <a href="https://t.me/+b2iItEFYh_VjYTQy" target="_blank" class="channel-link">ПЕРЕЙТИ</a>
+                </div>
+            </div>
+            
+            <div class="channel-card">
+                <div class="project-header">
+                    <div class="channel-name">Музыка</div>
+                    <div class="channel-role">МУЗЫКА</div>
+                </div>
+                <div class="channel-description">Ремиксы треков в стилях Speed up, Nightcore, reverb.</div>
+                <div class="channel-links">
+                    <a href="https://t.me/HolyDaySex" target="_blank" class="channel-link">ПЕРЕЙТИ</a>
+                </div>
+            </div>
+        </div>
 
-            <a href="https://t.me/ArtHash" target="_blank" class="link-btn">
-                <span><i class="fas fa-star"></i> Репутация (Отзывы)</span>
-            </a>
-
-            <a href="https://t.me/+0HTJLxYkbpEyNWYy" target="_blank" class="link-btn">
-                <span><i class="fas fa-user-secret"></i> OSINT Канал</span>
-            </a>
-
-            <a href="https://t.me/+b2iItEFYh_VjYTQy" target="_blank" class="link-btn">
-                <span><i class="fas fa-laugh-squint"></i> Канал по троллингу</span>
-            </a>
+        <!-- Секция репутации -->
+        <div class="reputation-section section">
+            <div class="reputation-card">
+                <div class="reputation-title">Репутация</div>
+                <div class="reputation-description">Канал с отзывами и репутацией</div>
+                <a href="https://t.me/ArtHash" target="_blank" class="reputation-link">Перейти к отзывам</a>
+            </div>
         </div>
 
         <!-- Новогодняя секция с видео-фоном -->
@@ -1288,4 +1435,4 @@
         }
     </script>
 </body>
-    </html>
+</html>
