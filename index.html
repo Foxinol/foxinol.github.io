@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Type | CodePlen</title>
+    <title>Type | TypeFrag</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -29,6 +29,7 @@
             --christmas-red: #ff6b6b;
             --christmas-green: #51cf66;
             --christmas-gold: #ffd43b;
+            --frozen-blue: #38bdf8;
         }
 
         * {
@@ -253,6 +254,53 @@
             vertical-align: middle;
         }
 
+        /* Блок твинка */
+        .twin-info {
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.7), rgba(50, 20, 60, 0.5));
+            border: 1px solid var(--border-light);
+            padding: 18px;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            color: var(--text-secondary);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .twin-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff6b6b, #a855f7, #38bdf8);
+        }
+
+        .twin-info:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .twin-info i {
+            color: var(--accent-primary);
+            margin-right: 8px;
+        }
+
+        .twin-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b, #a855f7);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 8px;
+            font-size: 0.85rem;
+        }
+
         /* Гарант блок */
         .guarantor-info {
             background: var(--bg-card);
@@ -417,7 +465,7 @@
             border: 1px solid rgba(168, 85, 247, 0.2);
         }
 
-        /* === НОВЫЕ СТИЛИ ДЛЯ ПРОЕКТОВ И КАНАЛОВ === */
+        /* Секции проектов и каналов */
         .projects-section, .channels-section, .reputation-section {
             background: var(--bg-card);
             border: 1px solid var(--border-light);
@@ -521,7 +569,34 @@
             color: white;
         }
 
-        /* Исправленная карточка репутации */
+        /* Стили для статуса заморожено */
+        .frozen-status {
+            font-size: 0.7rem;
+            color: var(--frozen-blue);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            margin-left: 5px;
+        }
+
+        .frozen-warning {
+            color: var(--frozen-blue);
+            font-size: 0.8rem;
+            margin-top: 5px;
+            padding: 5px;
+            background: rgba(56, 189, 248, 0.05);
+            border-radius: 6px;
+            border-left: 3px solid var(--frozen-blue);
+        }
+
+        .frozen-warning i {
+            margin-right: 5px;
+            color: var(--frozen-blue);
+        }
+
+        /* Карточка репутации */
         .reputation-card {
             text-align: center;
             background: rgba(16, 185, 129, 0.08);
@@ -692,7 +767,7 @@
             transform: scale(1.03);
         }
 
-        /* Исправленная плашка Tonkeeper - как у CryptoBot, но с фиолетовым цветом */
+        /* Кошелёк Tonkeeper */
         .wallet-box {
             display: flex;
             align-items: center;
@@ -831,6 +906,12 @@
             50% { transform: scale(1.1); opacity: 0.8; }
         }
 
+        /* Анимация для статуса заморожено */
+        @keyframes frozen-pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
         /* Адаптивность */
         @media (max-width: 500px) {
             .container {
@@ -847,7 +928,7 @@
             }
             
             .guarantor-info, .info-section, .faq-section, .new-year-section,
-            .projects-section, .channels-section, .reputation-section {
+            .projects-section, .channels-section, .reputation-section, .twin-info {
                 padding: 16px;
             }
             
@@ -944,10 +1025,19 @@
             </div>
 
             <h1>Type</h1>
-            <a href="https://t.me/CodePlen" target="_blank" class="username">@CodePlen</a>
+            <a href="https://t.me/TypeFrag" target="_blank" class="username">@TypeFrag</a>
 
             <div class="typewriter-container">
                 <span id="typewriter"></span><span class="cursor"></span>
+            </div>
+        </div>
+
+        <!-- Блок твинка -->
+        <div class="twin-info section">
+            <i class="fas fa-user-secret"></i> Основной аккаунт @CodePlen заморожен<br>
+            <span class="twin-tag">Твинк аккаунт @TypeFrag</span>
+            <div style="font-size: 0.8rem; margin-top: 8px; color: var(--text-secondary);">
+                Все контакты и активность перемещены сюда
             </div>
         </div>
 
@@ -1015,13 +1105,16 @@
         <!-- Секция проектов -->
         <div class="projects-section section">
             <h2 class="section-title"><i class="fas fa-rocket"></i> Проекты</h2>
+            <div class="frozen-warning">
+                <i class="fas fa-snowflake"></i> Основной аккаунт @CodePlen заморожен, некоторые проекты могли быть утеряны
+            </div>
             
             <div class="project-card">
                 <div class="project-header">
-                    <div class="project-name">Шоп - Telegram магазин</div>
+                    <div class="project-name">Шоп - Telegram магазин <span class="frozen-status">ЗАМОРОЖЕН</span></div>
                     <div class="project-role">ВЛАДЕЛЕЦ</div>
                 </div>
-                <div class="project-description">Telegram магазин с различными товарами.</div>
+                <div class="project-description">Telegram магазин с различными товарами. Проект заморожен вместе с основным аккаунтом.</div>
                 <div class="project-links">
                     <a href="https://t.me/pixelrare" target="_blank" class="project-link">ПЕРЕЙТИ</a>
                 </div>
@@ -1029,10 +1122,10 @@
             
             <div class="project-card">
                 <div class="project-header">
-                    <div class="project-name">Clarity</div>
+                    <div class="project-name">Clarity <span class="frozen-status">ЗАМОРОЖЕН</span></div>
                     <div class="project-role">РАЗРАБОТЧИК • ВЛАДЕЛЕЦ</div>
                 </div>
-                <div class="project-description">Telegram Userbot Clarity - инструмент для работы с командами и Telegram API.</div>
+                <div class="project-description">Telegram Userbot Clarity - инструмент для работы с командами и Telegram API. Проект заморожен.</div>
                 <div class="project-links">
                     <a href="https://t.me/ClarityOfficial" target="_blank" class="project-link">ПЕРЕЙТИ</a>
                 </div>
@@ -1042,13 +1135,16 @@
         <!-- Секция каналов -->
         <div class="channels-section section">
             <h2 class="section-title"><i class="fas fa-broadcast-tower"></i> Каналы</h2>
+            <div class="frozen-warning">
+                <i class="fas fa-snowflake"></i> Основной аккаунт @CodePlen заморожен, все каналы утеряны
+            </div>
             
             <div class="channel-card">
                 <div class="project-header">
-                    <div class="channel-name">Osint канал</div>
+                    <div class="channel-name">Osint канал <span class="frozen-status">ЗАМОРОЖЕН</span></div>
                     <div class="channel-role">ИНФОРМАЦИЯ</div>
                 </div>
-                <div class="channel-description">Посвящён сфере Osint и показывает какие данные могут быть в открытом доступе, проще говоря, с пастами.</div>
+                <div class="channel-description">Посвящён сфере Osint и показывает какие данные могут быть в открытом доступе, проще говоря, с пастами. Канал утерян из-за заморозки основного аккаунта.</div>
                 <div class="channel-links">
                     <a href="https://t.me/+0HTJLxYkbpEyNWYy" target="_blank" class="channel-link">ПЕРЕЙТИ</a>
                 </div>
@@ -1056,10 +1152,10 @@
             
             <div class="channel-card">
                 <div class="project-header">
-                    <div class="channel-name">Trolling канал</div>
+                    <div class="channel-name">Trolling канал <span class="frozen-status">ЗАМОРОЖЕН</span></div>
                     <div class="channel-role">РАЗВЛЕЧЕНИЯ</div>
                 </div>
-                <div class="channel-description">Посты про сферу троллинга и шаблоны.</div>
+                <div class="channel-description">Посты про сферу троллинга и шаблоны. Канал утерян из-за заморозки основного аккаунта.</div>
                 <div class="channel-links">
                     <a href="https://t.me/+b2iItEFYh_VjYTQy" target="_blank" class="channel-link">ПЕРЕЙТИ</a>
                 </div>
@@ -1067,10 +1163,10 @@
             
             <div class="channel-card">
                 <div class="project-header">
-                    <div class="channel-name">Музыка</div>
+                    <div class="channel-name">Музыка <span class="frozen-status">ЗАМОРОЖЕН</span></div>
                     <div class="channel-role">МУЗЫКА</div>
                 </div>
-                <div class="channel-description">Ремиксы треков в стилях Speed up, Nightcore, reverb.</div>
+                <div class="channel-description">Ремиксы треков в стилях Speed up, Nightcore, reverb. Канал утерян из-за заморозки основного аккаунта.</div>
                 <div class="channel-links">
                     <a href="https://t.me/HolyDaySex" target="_blank" class="channel-link">ПЕРЕЙТИ</a>
                 </div>
@@ -1081,7 +1177,10 @@
         <div class="reputation-section section">
             <div class="reputation-card">
                 <div class="reputation-title">Репутация</div>
-                <div class="reputation-description">Канал с отзывами и репутацией</div>
+                <div class="reputation-description">
+                    Канал с отзывами и репутацией <span class="frozen-status">ЗАМОРОЖЕН</span><br>
+                    <small style="color: var(--text-secondary);">Канал утерян из-за заморозки основного аккаунта @CodePlen</small>
+                </div>
                 <a href="https://t.me/ArtHash" target="_blank" class="reputation-link">Перейти к отзывам</a>
             </div>
         </div>
@@ -1152,6 +1251,7 @@
             initNewYearTimer();
             initScrollAnimations();
             initVideoBackground();
+            initFrozenStatusAnimation();
         });
 
         // --- Снежный фон ---
@@ -1185,6 +1285,19 @@
                     flake.style.opacity = Math.random() * 0.5 + 0.3;
                 });
             }
+        }
+
+        // --- Анимация статуса "заморожен" ---
+        function initFrozenStatusAnimation() {
+            const frozenElements = document.querySelectorAll('.frozen-status');
+            
+            frozenElements.forEach(element => {
+                // Добавляем пульсирующую анимацию
+                element.style.animation = 'frozen-pulse 2s infinite';
+                
+                // Добавляем иконку снежинки перед текстом
+                element.innerHTML = `<i class="fas fa-snowflake" style="margin-right: 3px;"></i>${element.textContent}`;
+            });
         }
 
         // --- Приветствие в зависимости от времени суток ---
@@ -1236,7 +1349,7 @@
         // --- Тайп-райтер с новыми фразами ---
         function initTypewriter() {
             const phrases = [
-                "Вайбкоддер ебаный",
+                "AI-Driven Software Systems Engineer",
                 "type@root:~$",
                 "Трололо",
                 "Тайпичек",
@@ -1435,4 +1548,4 @@
         }
     </script>
 </body>
-</html>
+        </html>
