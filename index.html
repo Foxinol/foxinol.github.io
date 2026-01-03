@@ -519,7 +519,7 @@
         .project-header, .channel-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 10px;
         }
 
@@ -527,6 +527,8 @@
             font-weight: 700;
             font-size: 1rem;
             color: var(--text-primary);
+            flex: 1;
+            margin-right: 10px;
         }
 
         .project-role, .channel-role {
@@ -536,6 +538,7 @@
             padding: 3px 8px;
             border-radius: 10px;
             font-weight: 600;
+            white-space: nowrap;
         }
 
         .project-description, .channel-description {
@@ -569,31 +572,44 @@
             color: white;
         }
 
-        /* Стили для статуса заморожено */
+        /* Стили для статуса заморожено - УЛУЧШЕННАЯ ВЕРСИЯ */
+        .frozen-status-container {
+            margin-top: 8px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
         .frozen-status {
-            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.75rem;
             color: var(--frozen-blue);
             background: rgba(56, 189, 248, 0.1);
-            padding: 3px 8px;
+            padding: 5px 12px;
             border-radius: 10px;
             font-weight: 600;
             border: 1px solid rgba(56, 189, 248, 0.3);
-            margin-left: 5px;
+            animation: frozen-pulse 2s infinite;
         }
 
         .frozen-warning {
             color: var(--frozen-blue);
             font-size: 0.8rem;
             margin-top: 5px;
-            padding: 5px;
+            padding: 8px 12px;
             background: rgba(56, 189, 248, 0.05);
-            border-radius: 6px;
+            border-radius: 8px;
             border-left: 3px solid var(--frozen-blue);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .frozen-warning i {
-            margin-right: 5px;
             color: var(--frozen-blue);
+            font-size: 0.9rem;
         }
 
         /* Карточка репутации */
@@ -952,6 +968,24 @@
             .project-card, .channel-card, .reputation-card {
                 padding: 14px;
             }
+            
+            .project-header, .channel-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .project-name, .channel-name {
+                margin-right: 0;
+            }
+            
+            .project-role, .channel-role {
+                align-self: flex-start;
+            }
+            
+            .frozen-status-container {
+                margin-top: 10px;
+            }
         }
 
         @media (max-width: 350px) {
@@ -1111,8 +1145,11 @@
             
             <div class="project-card">
                 <div class="project-header">
-                    <div class="project-name">Шоп - Telegram магазин <span class="frozen-status">ЗАМОРОЖЕН</span></div>
+                    <div class="project-name">Шоп - Telegram магазин</div>
                     <div class="project-role">ВЛАДЕЛЕЦ</div>
+                </div>
+                <div class="frozen-status-container">
+                    <span class="frozen-status"><i class="fas fa-snowflake"></i> ЗАМОРОЖЕН</span>
                 </div>
                 <div class="project-description">Telegram магазин с различными товарами. Проект заморожен вместе с основным аккаунтом.</div>
                 <div class="project-links">
@@ -1122,8 +1159,11 @@
             
             <div class="project-card">
                 <div class="project-header">
-                    <div class="project-name">Clarity <span class="frozen-status">ЗАМОРОЖЕН</span></div>
+                    <div class="project-name">Clarity</div>
                     <div class="project-role">РАЗРАБОТЧИК • ВЛАДЕЛЕЦ</div>
+                </div>
+                <div class="frozen-status-container">
+                    <span class="frozen-status"><i class="fas fa-snowflake"></i> ЗАМОРОЖЕН</span>
                 </div>
                 <div class="project-description">Telegram Userbot Clarity - инструмент для работы с командами и Telegram API. Проект заморожен.</div>
                 <div class="project-links">
@@ -1141,8 +1181,11 @@
             
             <div class="channel-card">
                 <div class="project-header">
-                    <div class="channel-name">Osint канал <span class="frozen-status">ЗАМОРОЖЕН</span></div>
+                    <div class="channel-name">Osint канал</div>
                     <div class="channel-role">ИНФОРМАЦИЯ</div>
+                </div>
+                <div class="frozen-status-container">
+                    <span class="frozen-status"><i class="fas fa-snowflake"></i> ЗАМОРОЖЕН</span>
                 </div>
                 <div class="channel-description">Посвящён сфере Osint и показывает какие данные могут быть в открытом доступе, проще говоря, с пастами. Канал утерян из-за заморозки основного аккаунта.</div>
                 <div class="channel-links">
@@ -1152,8 +1195,11 @@
             
             <div class="channel-card">
                 <div class="project-header">
-                    <div class="channel-name">Trolling канал <span class="frozen-status">ЗАМОРОЖЕН</span></div>
+                    <div class="channel-name">Trolling канал</div>
                     <div class="channel-role">РАЗВЛЕЧЕНИЯ</div>
+                </div>
+                <div class="frozen-status-container">
+                    <span class="frozen-status"><i class="fas fa-snowflake"></i> ЗАМОРОЖЕН</span>
                 </div>
                 <div class="channel-description">Посты про сферу троллинга и шаблоны. Канал утерян из-за заморозки основного аккаунта.</div>
                 <div class="channel-links">
@@ -1163,8 +1209,11 @@
             
             <div class="channel-card">
                 <div class="project-header">
-                    <div class="channel-name">Музыка <span class="frozen-status">ЗАМОРОЖЕН</span></div>
+                    <div class="channel-name">Музыка</div>
                     <div class="channel-role">МУЗЫКА</div>
+                </div>
+                <div class="frozen-status-container">
+                    <span class="frozen-status"><i class="fas fa-snowflake"></i> ЗАМОРОЖЕН</span>
                 </div>
                 <div class="channel-description">Ремиксы треков в стилях Speed up, Nightcore, reverb. Канал утерян из-за заморозки основного аккаунта.</div>
                 <div class="channel-links">
@@ -1178,8 +1227,13 @@
             <div class="reputation-card">
                 <div class="reputation-title">Репутация</div>
                 <div class="reputation-description">
-                    Канал с отзывами и репутацией <span class="frozen-status">ЗАМОРОЖЕН</span><br>
-                    <small style="color: var(--text-secondary);">Канал утерян из-за заморозки основного аккаунта @CodePlen</small>
+                    Канал с отзывами и репутацией
+                </div>
+                <div class="frozen-status-container">
+                    <span class="frozen-status"><i class="fas fa-snowflake"></i> ЗАМОРОЖЕН</span>
+                </div>
+                <div style="color: var(--text-secondary); font-size: 0.8rem; margin: 10px 0 15px;">
+                    Канал утерян из-за заморозки основного аккаунта @CodePlen
                 </div>
                 <a href="https://t.me/ArtHash" target="_blank" class="reputation-link">Перейти к отзывам</a>
             </div>
@@ -1251,7 +1305,6 @@
             initNewYearTimer();
             initScrollAnimations();
             initVideoBackground();
-            initFrozenStatusAnimation();
         });
 
         // --- Снежный фон ---
@@ -1285,19 +1338,6 @@
                     flake.style.opacity = Math.random() * 0.5 + 0.3;
                 });
             }
-        }
-
-        // --- Анимация статуса "заморожен" ---
-        function initFrozenStatusAnimation() {
-            const frozenElements = document.querySelectorAll('.frozen-status');
-            
-            frozenElements.forEach(element => {
-                // Добавляем пульсирующую анимацию
-                element.style.animation = 'frozen-pulse 2s infinite';
-                
-                // Добавляем иконку снежинки перед текстом
-                element.innerHTML = `<i class="fas fa-snowflake" style="margin-right: 3px;"></i>${element.textContent}`;
-            });
         }
 
         // --- Приветствие в зависимости от времени суток ---
@@ -1548,4 +1588,4 @@
         }
     </script>
 </body>
-        </html>
+    </html>
