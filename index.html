@@ -851,6 +851,22 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        /* Звездочка */
+        .easter-egg {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: var(--christmas-gold);
+            text-decoration: none;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .easter-egg:hover {
+            transform: scale(1.3) rotate(15deg);
+        }
+
         /* RGB анимация для текста */
         @keyframes rgb-text {
             0% {
@@ -1055,7 +1071,11 @@
     <div class="container" style="display: none;">
         <div class="header section">
             <div class="avatar-container">
-                <img src="https://pomf2.lain.la/f/z4m59cao.jpg" alt="Type Avatar" class="avatar" loading="eager">
+                <!-- Изменено на video для анимированного аватара -->
+                <video class="avatar" autoplay muted loop playsinline>
+                    <source src="https://pomf2.lain.la/f/h5std6x.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
             </div>
 
             <h1>Type</h1>
@@ -1215,7 +1235,7 @@
                 <div class="frozen-status-container">
                     <span class="frozen-status"><i class="fas fa-snowflake"></i> ЗАМОРОЖЕН</span>
                 </div>
-                <div class="channel-description">Ремиксы треков в стилях Speed up, Nightcore, reverb. Канал утерян из-за заморозки основного аккаунта.</div>
+                <div class="channel-description">Ремиксы треков в стилях Speed up, Nightcore, Reverb. Канал утерян из-за заморозки основного аккаунта.</div>
                 <div class="channel-links">
                     <a href="https://t.me/HolyDaySex" target="_blank" class="channel-link">ПЕРЕЙТИ</a>
                 </div>
@@ -1268,7 +1288,7 @@
                 </div>
                 
                 <div class="new-year-message">
-                    Скоро новый год... А пока можно успеть многое сделать!
+                    Новый год.. А пока можно успеть многое сделать!
                 </div>
             </div>
         </div>
@@ -1287,6 +1307,11 @@
                     <span><span style="color: var(--text-secondary);">TON:</span> UQBix5Y...RulJb2DN</span>
                 </div>
             </div>
+            
+            <!-- Звездочка -->
+            <a href="https://pomf2.lain.la/f/u6nux6af.mp4" target="_blank" class="easter-egg" title="Дело Кαцураги Мисαто, часть 1я">
+                *
+            </a>
         </div>
     </div>
 
@@ -1350,13 +1375,13 @@
             let greeting = '';
             
             if (hour >= 5 && hour < 12) {
-                greeting = 'Утречка ☀️';
+                greeting = 'Утречка';
             } else if (hour >= 12 && hour < 18) {
-                greeting = 'Добрый день (0_0)>';
+                greeting = 'Добрый день';
             } else if (hour >= 18 && hour < 23) {
-                greeting = 'Классного вечера тебе :>';
+                greeting = 'Вечерняя смена';
             } else {
-                greeting = 'Че не спишь? -_-';
+                greeting = 'Время прибытия';
             }
             
             greetingText.textContent = greeting;
@@ -1386,15 +1411,16 @@
             });
         }
 
-        // --- Тайп-райтер с новыми фразами ---
+        // --- Тайп-райтер с обновленными фразами ---
         function initTypewriter() {
             const phrases = [
                 "AI-Driven Software Systems Engineer",
+                "Дело Кαцураги Мисαто, часть 1я*",
                 "type@root:~$",
                 "Трололо",
                 "Тайпичек",
-                "еблан чутка",
-                "ты правда сюда смотришь?"
+                "Еблан чутка",
+                "Ты правда сюда смотришь?"
             ];
             
             const typewriter = document.getElementById('typewriter');
@@ -1545,6 +1571,12 @@
             if (video) {
                 video.playbackRate = 0.7; // Замедляем видео для более плавного эффекта
             }
+            
+            // Также для аватара
+            const avatarVideo = document.querySelector('.avatar');
+            if (avatarVideo) {
+                avatarVideo.playbackRate = 1.0;
+            }
         }
 
         // --- Плавные анимации при скролле ---
@@ -1588,4 +1620,4 @@
         }
     </script>
 </body>
-    </html>
+</html>
