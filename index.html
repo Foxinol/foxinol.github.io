@@ -13,6 +13,8 @@
             --bg-primary: #0a0a0a;
             --bg-secondary: #111111;
             --bg-glass: rgba(255, 255, 255, 0.05);
+            --bg-glass-light: rgba(255, 255, 255, 0.08);
+            --bg-glass-medium: rgba(255, 255, 255, 0.12);
             --bg-card: rgba(30, 30, 30, 0.7);
             --text-primary: #ffffff;
             --text-secondary: #b0b0b0;
@@ -25,6 +27,7 @@
             --border-medium: rgba(255, 255, 255, 0.12);
             --shadow-glow: 0 0 30px rgba(168, 85, 247, 0.15);
             --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
             --gradient-accent: linear-gradient(135deg, #a855f7, #8b5cf6, #6366f1);
             --christmas-red: #ff6b6b;
             --christmas-green: #51cf66;
@@ -55,15 +58,16 @@
             position: relative;
         }
 
-        /* Задний фон с шумом и градиентами */
+        /* Задний фон с шумом и градиентами - усилен для glassmorphism */
         body::before {
             content: "";
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 20% 30%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.05) 0%, transparent 50%),
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+                radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.1) 0%, transparent 60%),
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: -1;
         }
@@ -225,11 +229,14 @@
             background: var(--bg-glass);
             border: 1px solid var(--border-light);
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .username:hover {
             background: rgba(168, 85, 247, 0.1);
             border-color: var(--accent-primary);
+            transform: translateY(-2px);
         }
 
         /* Тайп-райтер */
@@ -254,17 +261,18 @@
             vertical-align: middle;
         }
 
-        /* Блок твинка */
+        /* Блок твинка - стеклянный эффект */
         .twin-info {
-            background: linear-gradient(135deg, rgba(30, 30, 30, 0.7), rgba(50, 20, 60, 0.5));
-            border: 1px solid var(--border-light);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 18px;
             border-radius: 16px;
             font-size: 0.9rem;
             margin-bottom: 30px;
             color: var(--text-secondary);
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
+            box-shadow: var(--shadow-glass);
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -283,6 +291,7 @@
         .twin-info:hover {
             transform: scale(1.02);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .twin-info i {
@@ -301,17 +310,18 @@
             font-size: 0.85rem;
         }
 
-        /* Гарант блок */
+        /* Гарант блок - стеклянный эффект */
         .guarantor-info {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 18px;
             border-radius: 16px;
             font-size: 0.9rem;
             margin-bottom: 30px;
             color: var(--text-secondary);
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
+            box-shadow: var(--shadow-glass);
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -330,6 +340,7 @@
         .guarantor-info:hover {
             transform: scale(1.02);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .guarantor-info i {
@@ -348,27 +359,29 @@
             font-size: 0.85rem;
         }
 
-        /* FAQ секция */
+        /* FAQ секция - стеклянный эффект */
         .faq-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 16px;
             margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
+            box-shadow: var(--shadow-glass);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .faq-section:hover {
             transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .faq-item {
             text-align: left;
             margin-bottom: 15px;
             padding-bottom: 15px;
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .faq-item:last-child {
@@ -409,20 +422,22 @@
             animation: pulse 2s infinite;
         }
 
-        /* Инфо секция */
+        /* Инфо секция - стеклянный эффект */
         .info-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 16px;
             margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
+            box-shadow: var(--shadow-glass);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .info-section:hover {
             transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .info-category {
@@ -465,21 +480,23 @@
             border: 1px solid rgba(168, 85, 247, 0.2);
         }
 
-        /* Секции проектов и каналов */
+        /* Секции проектов и каналов - стеклянный эффект */
         .projects-section, .channels-section, .reputation-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 25px;
             border-radius: 16px;
             margin-bottom: 25px;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
+            box-shadow: var(--shadow-glass);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             text-align: left;
         }
 
         .projects-section:hover, .channels-section:hover, .reputation-section:hover {
             transform: scale(1.02);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .section-title {
@@ -500,11 +517,12 @@
 
         .project-card, .channel-card, .reputation-card {
             background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--border-light);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
             padding: 18px;
             margin-bottom: 15px;
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
         .project-card:hover, .channel-card:hover, .reputation-card:hover {
@@ -565,6 +583,7 @@
             font-weight: 500;
             display: inline-block;
             text-align: center;
+            background: rgba(168, 85, 247, 0.05);
         }
 
         .project-link:hover, .channel-link:hover {
@@ -651,14 +670,15 @@
             box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
         }
 
-        /* Новогодняя секция */
+        /* Новогодняя секция с стеклянным эффектом */
         .new-year-section {
-            background: rgba(0, 0, 0, 0.7);
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
             border: 1px solid rgba(255, 107, 107, 0.3);
             padding: 25px;
             border-radius: 16px;
             margin-bottom: 30px;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
             position: relative;
             overflow: hidden;
             box-shadow: 0 0 40px rgba(255, 107, 107, 0.2);
@@ -667,6 +687,7 @@
 
         .new-year-section:hover {
             transform: scale(1.02);
+            border-color: rgba(255, 107, 107, 0.4);
         }
 
         .new-year-section::before {
@@ -728,6 +749,7 @@
             min-width: 70px;
             border: 1px solid rgba(255, 212, 59, 0.3);
             animation: rgb-text 3s infinite linear;
+            backdrop-filter: blur(5px);
         }
 
         .timer-label {
@@ -749,7 +771,7 @@
         .donate-section {
             margin-top: 40px;
             padding-top: 25px;
-            border-top: 1px solid var(--border-light);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .donate-title {
@@ -776,14 +798,17 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             font-weight: 500;
             cursor: pointer;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .cryptobot-btn:hover {
             background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(168, 85, 247, 0.25));
             transform: scale(1.03);
+            border-color: rgba(56, 189, 248, 0.5);
         }
 
-        /* Кошелёк Tonkeeper */
+        /* Кошелёк Tonkeeper - стеклянный эффект */
         .wallet-box {
             display: flex;
             align-items: center;
@@ -801,11 +826,14 @@
             cursor: pointer;
             font-size: 0.9rem;
             position: relative;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .wallet-box:hover {
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(139, 92, 246, 0.25));
             transform: scale(1.03);
+            border-color: rgba(168, 85, 247, 0.5);
         }
 
         .wallet-box .wallet-icon {
@@ -880,6 +908,7 @@
             align-items: center;
             z-index: 10000;
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             opacity: 0;
             transition: opacity 0.5s ease;
         }
@@ -890,15 +919,17 @@
         }
 
         .modal-content {
-            background: var(--bg-card);
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.9), rgba(20, 20, 20, 0.9));
             border-radius: 20px;
             width: 90%;
             max-width: 800px;
             overflow: hidden;
-            border: 1px solid var(--border-light);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
             transform: scale(0.9);
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
 
         .easter-modal.active .modal-content {
@@ -909,8 +940,9 @@
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(139, 92, 246, 0.2));
             padding: 20px;
             text-align: center;
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
+            backdrop-filter: blur(10px);
         }
 
         .modal-close {
@@ -929,6 +961,7 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
         .modal-close:hover {
@@ -970,15 +1003,16 @@
             max-height: 400px;
             border-radius: 12px;
             margin-bottom: 20px;
-            border: 2px solid var(--border-light);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             background: black;
         }
 
         .modal-footer {
             padding: 20px;
             text-align: center;
-            border-top: 1px solid var(--border-light);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .modal-footer-text {
@@ -1188,8 +1222,8 @@
             right: 20px;
             width: 40px;
             height: 40px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1200,6 +1234,7 @@
             transition: all 0.3s ease;
             z-index: 100;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .scroll-indicator.visible {
@@ -1315,33 +1350,27 @@
             <div class="info-category">
                 <div class="category-title"><i class="fas fa-code"></i> С чем работал</div>
                 <div class="category-content">
-                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">HTML/CSS</span>
                     <span class="tech-tag">Python</span>
                     <span class="tech-tag">JavaScript</span>
                     <span class="tech-tag">Bash</span>
-                    <br>
-                    <span class="tech-tag">Windows</span>
-                    <span class="tech-tag">Linux Mint xfce</span>
-                    <span class="tech-tag">Ubuntu</span>
-                    <span class="tech-tag">Android</span>
-                    <span class="tech-tag">Terminal</span>
+                    <span class="tech-tag">Linux (Mint/Ubuntu)</span>
                 </div>
             </div>
             
             <div class="info-category">
                 <div class="category-title"><i class="fas fa-bullseye"></i> Основные направления</div>
                 <div class="category-content">
+                    <span class="tech-tag">Разработка Telegram-ботов и модулей</span>
+                    <span class="tech-tag">Веб-разработка</span>
                     <span class="tech-tag">Антискам движение Liars Base</span>
-                    <span class="tech-tag">Программирование</span>
-                    <span class="tech-tag">Социальная инженерия</span>
-                    <span class="tech-tag">Автоматизация</span>
                 </div>
             </div>
             
             <div class="info-category">
                 <div class="category-title"><i class="fas fa-user"></i> О себе</div>
                 <div class="category-content">
-                    Школьник, пытается не упереться в потолок. Скрипт-кидди.
+                    Разработчик и создатель модулей для Telegram. Работаю над проектами в сфере автоматизации, OSINT и веб-технологий.
                 </div>
             </div>
         </div>
@@ -1384,50 +1413,38 @@
 
         <!-- Секция каналов -->
         <div class="channels-section section">
-            <h2 class="section-title"><i class="fas fa-broadcast-tower"></i> Каналы</h2>
-            <div class="frozen-warning">
-                <i class="fas fa-snowflake"></i> Основной аккаунт @CodePlen заморожен, все каналы утеряны
-            </div>
+            <h2 class="section-title"><i class="fas fa-broadcast-tower"></i> Каналы и проекты</h2>
             
             <div class="channel-card">
                 <div class="project-header">
-                    <div class="channel-name">Osint канал</div>
-                    <div class="channel-role">ИНФОРМАЦИЯ</div>
+                    <div class="channel-name">Type | Modules</div>
+                    <div class="channel-role">РАЗРАБОТКА</div>
                 </div>
-                <div class="frozen-status-container">
-                    <span class="frozen-status"><i class="fas fa-snowflake"></i> ЗАМОРОЖЕН</span>
-                </div>
-                <div class="channel-description">Посвящён сфере Osint и показывает какие данные могут быть в открытом доступе, проще говоря, с пастами. Канал утерян из-за заморозки основного аккаунта.</div>
+                <div class="channel-description">Канал с модулями для Heroku Userbot и Hikka Userbot. Актуальные разработки и обновления.</div>
                 <div class="channel-links">
-                    <a href="https://t.me/+0HTJLxYkbpEyNWYy" target="_blank" class="channel-link">ПЕРЕЙТИ</a>
+                    <a href="https://t.me/TypeModules" target="_blank" class="channel-link">ПЕРЕЙТИ В КАНАЛ</a>
                 </div>
             </div>
             
             <div class="channel-card">
                 <div class="project-header">
-                    <div class="channel-name">Trolling канал</div>
-                    <div class="channel-role">РАЗВЛЕЧЕНИЯ</div>
+                    <div class="channel-name">Работы | Type</div>
+                    <div class="channel-role">OSINT</div>
                 </div>
-                <div class="frozen-status-container">
-                    <span class="frozen-status"><i class="fas fa-snowflake"></i> ЗАМОРОЖЕН</span>
-                </div>
-                <div class="channel-description">Посты про сферу троллинга и шаблоны. Канал утерян из-за заморозки основного аккаунта.</div>
+                <div class="channel-description">Канал, посвящённый сфере OSINT, исследованиям и работам в области открытых данных.</div>
                 <div class="channel-links">
-                    <a href="https://t.me/+b2iItEFYh_VjYTQy" target="_blank" class="channel-link">ПЕРЕЙТИ</a>
+                    <a href="https://t.me/+zGgOFfxXNSljZGZh" target="_blank" class="channel-link">ПЕРЕЙТИ В КАНАЛ</a>
                 </div>
             </div>
             
             <div class="channel-card">
                 <div class="project-header">
-                    <div class="channel-name">Музыка</div>
-                    <div class="channel-role">МУЗЫКА</div>
+                    <div class="channel-name">Referral | Type</div>
+                    <div class="channel-role">РЕФЕРАЛКИ</div>
                 </div>
-                <div class="frozen-status-container">
-                    <span class="frozen-status"><i class="fas fa-snowflake"></i> ЗАМОРОЖЕН</span>
-                </div>
-                <div class="channel-description">Ремиксы треков в стилях Speed up, Nightcore, Reverb. Канал утерян из-за заморозки основного аккаунта.</div>
+                <div class="channel-description">Реферальные ссылки и партнёрские программы.</div>
                 <div class="channel-links">
-                    <a href="https://t.me/HolyDaySex" target="_blank" class="channel-link">ПЕРЕЙТИ</a>
+                    <a href="https://t.me/referaltype" target="_blank" class="channel-link">ПЕРЕЙТИ В КАНАЛ</a>
                 </div>
             </div>
         </div>
@@ -1435,17 +1452,11 @@
         <!-- Секция репутации -->
         <div class="reputation-section section">
             <div class="reputation-card">
-                <div class="reputation-title">Репутация</div>
+                <div class="reputation-title">Репутация и отзывы</div>
                 <div class="reputation-description">
-                    Канал с отзывами и репутацией
+                    Канал с отзывами о сотрудничестве, гарантийных сделках и разработке.
                 </div>
-                <div class="frozen-status-container">
-                    <span class="frozen-status"><i class="fas fa-snowflake"></i> ЗАМОРОЖЕН</span>
-                </div>
-                <div style="color: var(--text-secondary); font-size: 0.8rem; margin: 10px 0 15px;">
-                    Канал утерян из-за заморозки основного аккаунта @CodePlen
-                </div>
-                <a href="https://t.me/ArtHash" target="_blank" class="reputation-link">Перейти к отзывам</a>
+                <a href="https://t.me/ArtHash1" target="_blank" class="reputation-link">Перейти к отзывам</a>
             </div>
         </div>
 
@@ -1486,7 +1497,7 @@
         <div class="donate-section">
             <div class="donate-title">Поддержка / Донат</div>
             
-            <a href="http://t.me/send?start=IVsrUzEY5ImZ" target="_blank" class="cryptobot-btn">
+            <a href="http://t.me/send?start=IV5T8VX8uoGy" target="_blank" class="cryptobot-btn">
                 <i class="fas fa-robot"></i> Отправить через CryptoBot
             </a>
 
@@ -1723,13 +1734,12 @@
         // --- Тайп-райтер с обновленными фразами ---
         function initTypewriter() {
             const phrases = [
+                "Разработчик модулей для Telegram",
                 "AI-Driven Software Systems Engineer",
+                "type@root:~$ whoami",
+                "Гарант сделок | Комиссия 3%",
                 "Дело Кαцураги Мисαто, часть 1я*",
-                "type@root:~$",
-                "Трололо",
-                "Тайпичек",
-                "Еблан чутка",
-                "Ты правда сюда смотришь?"
+                "Создаю и автоматизирую"
             ];
             
             const typewriter = document.getElementById('typewriter');
