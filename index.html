@@ -18,20 +18,19 @@
             --bg-card: rgba(30, 30, 30, 0.7);
             --text-primary: #ffffff;
             --text-secondary: #b0b0b0;
-            --accent-primary: #a855f7;
-            --accent-secondary: #8b5cf6;
+            --accent-primary: #38bdf8;
+            --accent-secondary: #0ea5e9;
+            --accent-tertiary: #0284c7;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
             --border-light: rgba(255, 255, 255, 0.08);
             --border-medium: rgba(255, 255, 255, 0.12);
-            --shadow-glow: 0 0 30px rgba(168, 85, 247, 0.15);
-            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
-            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --gradient-accent: linear-gradient(135deg, #a855f7, #8b5cf6, #6366f1);
-            --christmas-red: #ff6b6b;
-            --christmas-green: #51cf66;
-            --christmas-gold: #ffd43b;
+            --shadow-glow: 0 0 30px rgba(56, 189, 248, 0.2);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --gradient-accent: linear-gradient(135deg, #38bdf8, #0ea5e9, #0284c7);
+            --gradient-blue: linear-gradient(135deg, #38bdf8, #3b82f6, #2563eb);
             --frozen-blue: #38bdf8;
         }
 
@@ -64,9 +63,9 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.1) 0%, transparent 60%),
+                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 60%),
                 url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: -1;
@@ -132,7 +131,7 @@
         .greeting-text {
             font-size: 2rem;
             margin-bottom: 20px;
-            background: var(--gradient-accent);
+            background: var(--gradient-blue);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -181,7 +180,7 @@
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid transparent;
-            background: var(--gradient-accent) border-box;
+            background: var(--gradient-blue) border-box;
             position: relative;
             transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: var(--shadow-glow);
@@ -195,7 +194,7 @@
             left: -4px;
             right: -4px;
             bottom: -4px;
-            background: var(--gradient-accent);
+            background: var(--gradient-blue);
             border-radius: 50%;
             z-index: -1;
             opacity: 0.3;
@@ -210,7 +209,7 @@
         h1 {
             font-size: 2.5rem;
             margin-bottom: 8px;
-            background: var(--gradient-accent);
+            background: var(--gradient-blue);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -234,7 +233,7 @@
         }
 
         .username:hover {
-            background: rgba(168, 85, 247, 0.1);
+            background: rgba(56, 189, 248, 0.1);
             border-color: var(--accent-primary);
             transform: translateY(-2px);
         }
@@ -259,104 +258,6 @@
             background: var(--accent-primary);
             animation: blink 1s infinite;
             vertical-align: middle;
-        }
-
-        /* Блок твинка - стеклянный эффект */
-        .twin-info {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 18px;
-            border-radius: 16px;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-            color: var(--text-secondary);
-            backdrop-filter: blur(15px) saturate(180%);
-            -webkit-backdrop-filter: blur(15px) saturate(180%);
-            box-shadow: var(--shadow-glass);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .twin-info::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ff6b6b, #a855f7, #38bdf8);
-        }
-
-        .twin-info:hover {
-            transform: scale(1.02);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .twin-info i {
-            color: var(--accent-primary);
-            margin-right: 8px;
-        }
-
-        .twin-tag {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff6b6b, #a855f7);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-            margin-top: 8px;
-            font-size: 0.85rem;
-        }
-
-        /* Гарант блок - стеклянный эффект */
-        .guarantor-info {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 18px;
-            border-radius: 16px;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-            color: var(--text-secondary);
-            backdrop-filter: blur(15px) saturate(180%);
-            -webkit-backdrop-filter: blur(15px) saturate(180%);
-            box-shadow: var(--shadow-glass);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .guarantor-info::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-accent);
-        }
-
-        .guarantor-info:hover {
-            transform: scale(1.02);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .guarantor-info i {
-            color: var(--accent-primary);
-            margin-right: 8px;
-        }
-
-        .price-tag {
-            display: inline-block;
-            background: var(--gradient-accent);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-            margin-top: 8px;
-            font-size: 0.85rem;
         }
 
         /* FAQ секция - стеклянный эффект */
@@ -471,13 +372,13 @@
 
         .tech-tag {
             display: inline-block;
-            background: rgba(168, 85, 247, 0.1);
+            background: rgba(56, 189, 248, 0.1);
             color: var(--accent-primary);
             padding: 3px 8px;
             border-radius: 6px;
             font-size: 0.8rem;
             margin: 2px;
-            border: 1px solid rgba(168, 85, 247, 0.2);
+            border: 1px solid rgba(56, 189, 248, 0.2);
         }
 
         /* Секции проектов и каналов - стеклянный эффект */
@@ -552,7 +453,7 @@
         .project-role, .channel-role {
             font-size: 0.75rem;
             color: var(--accent-primary);
-            background: rgba(168, 85, 247, 0.1);
+            background: rgba(56, 189, 248, 0.1);
             padding: 3px 8px;
             border-radius: 10px;
             font-weight: 600;
@@ -583,52 +484,12 @@
             font-weight: 500;
             display: inline-block;
             text-align: center;
-            background: rgba(168, 85, 247, 0.05);
+            background: rgba(56, 189, 248, 0.05);
         }
 
         .project-link:hover, .channel-link:hover {
             background: var(--accent-primary);
             color: white;
-        }
-
-        /* Стили для статуса заморожено */
-        .frozen-status-container {
-            margin-top: 8px;
-            margin-bottom: 10px;
-            width: 100%;
-        }
-
-        .frozen-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.75rem;
-            color: var(--frozen-blue);
-            background: rgba(56, 189, 248, 0.1);
-            padding: 5px 12px;
-            border-radius: 10px;
-            font-weight: 600;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            animation: frozen-pulse 2s infinite;
-        }
-
-        .frozen-warning {
-            color: var(--frozen-blue);
-            font-size: 0.8rem;
-            margin-top: 5px;
-            padding: 8px 12px;
-            background: rgba(56, 189, 248, 0.05);
-            border-radius: 8px;
-            border-left: 3px solid var(--frozen-blue);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .frozen-warning i {
-            color: var(--frozen-blue);
-            font-size: 0.9rem;
         }
 
         /* Карточка репутации */
@@ -673,7 +534,7 @@
         /* Новогодняя секция с стеклянным эффектом */
         .new-year-section {
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
-            border: 1px solid rgba(255, 107, 107, 0.3);
+            border: 1px solid rgba(59, 130, 246, 0.3);
             padding: 25px;
             border-radius: 16px;
             margin-bottom: 30px;
@@ -681,13 +542,13 @@
             -webkit-backdrop-filter: blur(15px) saturate(180%);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 40px rgba(255, 107, 107, 0.2);
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .new-year-section:hover {
             transform: scale(1.02);
-            border-color: rgba(255, 107, 107, 0.4);
+            border-color: rgba(59, 130, 246, 0.4);
         }
 
         .new-year-section::before {
@@ -697,7 +558,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--christmas-red), var(--christmas-gold), var(--christmas-green));
+            background: var(--gradient-blue);
         }
 
         .new-year-video-bg {
@@ -722,7 +583,7 @@
             margin-bottom: 20px;
             font-weight: 700;
             font-family: 'JetBrains Mono', monospace;
-            animation: rgb-text 3s infinite linear;
+            color: var(--accent-primary);
         }
 
         .timer {
@@ -747,8 +608,8 @@
             border-radius: 12px;
             padding: 10px;
             min-width: 70px;
-            border: 1px solid rgba(255, 212, 59, 0.3);
-            animation: rgb-text 3s infinite linear;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--accent-primary);
             backdrop-filter: blur(5px);
         }
 
@@ -788,7 +649,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(168, 85, 247, 0.15));
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(14, 165, 233, 0.15));
             border: 1px solid rgba(56, 189, 248, 0.3);
             padding: 16px;
             border-radius: 16px;
@@ -803,7 +664,7 @@
         }
 
         .cryptobot-btn:hover {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(168, 85, 247, 0.25));
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(14, 165, 233, 0.25));
             transform: scale(1.03);
             border-color: rgba(56, 189, 248, 0.5);
         }
@@ -814,8 +675,8 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(139, 92, 246, 0.15));
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(14, 165, 233, 0.15));
+            border: 1px solid rgba(56, 189, 248, 0.3);
             padding: 16px;
             border-radius: 16px;
             color: var(--accent-primary);
@@ -831,9 +692,9 @@
         }
 
         .wallet-box:hover {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(139, 92, 246, 0.25));
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(14, 165, 233, 0.25));
             transform: scale(1.03);
-            border-color: rgba(168, 85, 247, 0.5);
+            border-color: rgba(56, 189, 248, 0.5);
         }
 
         .wallet-box .wallet-icon {
@@ -877,188 +738,6 @@
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0);
-        }
-
-        /* Звездочка */
-        .easter-egg {
-            display: inline-block;
-            margin-top: 20px;
-            font-size: 1.5rem;
-            color: var(--christmas-gold);
-            text-decoration: none;
-            cursor: pointer;
-            animation: pulse 2s infinite;
-            transition: transform 0.3s ease;
-        }
-
-        .easter-egg:hover {
-            transform: scale(1.3) rotate(15deg);
-        }
-
-        /* МОДАЛЬНОЕ ОКНО ДЛЯ ПАСХАЛКИ */
-        .easter-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .easter-modal.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, rgba(30, 30, 30, 0.9), rgba(20, 20, 20, 0.9));
-            border-radius: 20px;
-            width: 90%;
-            max-width: 800px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7);
-            transform: scale(0.9);
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-        }
-
-        .easter-modal.active .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(139, 92, 246, 0.2));
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            backdrop-filter: blur(10px);
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(90deg);
-        }
-
-        .modal-counter {
-            font-size: 1.1rem;
-            color: var(--christmas-gold);
-            margin-bottom: 10px;
-            font-weight: 600;
-            text-shadow: 0 0 10px rgba(255, 212, 59, 0.5);
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            color: white;
-            font-weight: 700;
-            margin-bottom: 5px;
-            background: linear-gradient(90deg, #ff6b6b, #ffd43b, #51cf66);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .modal-subtitle {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .modal-body {
-            padding: 25px;
-            text-align: center;
-        }
-
-        .easter-video {
-            width: 100%;
-            max-height: 400px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            background: black;
-        }
-
-        .modal-footer {
-            padding: 20px;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .modal-footer-text {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
-
-        .modal-footer-link {
-            display: inline-block;
-            background: var(--gradient-accent);
-            color: white;
-            text-decoration: none;
-            padding: 10px 25px;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .modal-footer-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(168, 85, 247, 0.3);
-        }
-
-        /* RGB анимация для текста */
-        @keyframes rgb-text {
-            0% {
-                color: #ff6b6b;
-                text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
-            }
-            25% {
-                color: #51cf66;
-                text-shadow: 0 0 10px rgba(81, 207, 102, 0.5);
-            }
-            50% {
-                color: #38bdf8;
-                text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
-            }
-            75% {
-                color: #ffd43b;
-                text-shadow: 0 0 10px rgba(255, 212, 59, 0.5);
-            }
-            100% {
-                color: #ff6b6b;
-                text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
-            }
         }
 
         /* Анимации */
@@ -1108,10 +787,9 @@
             50% { transform: scale(1.1); opacity: 0.8; }
         }
 
-        /* Анимация для статуса заморожено */
-        @keyframes frozen-pulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         /* Адаптивность */
@@ -1129,8 +807,8 @@
                 height: 120px;
             }
             
-            .guarantor-info, .info-section, .faq-section, .new-year-section,
-            .projects-section, .channels-section, .reputation-section, .twin-info {
+            .info-section, .faq-section, .new-year-section,
+            .projects-section, .channels-section, .reputation-section {
                 padding: 16px;
             }
             
@@ -1167,32 +845,6 @@
             
             .project-role, .channel-role {
                 align-self: flex-start;
-            }
-            
-            .frozen-status-container {
-                margin-top: 10px;
-            }
-            
-            /* Адаптивность модального окна */
-            .modal-content {
-                width: 95%;
-                margin: 10px;
-            }
-            
-            .modal-header {
-                padding: 15px;
-            }
-            
-            .modal-body {
-                padding: 15px;
-            }
-            
-            .easter-video {
-                max-height: 250px;
-            }
-            
-            .modal-title {
-                font-size: 1.2rem;
             }
         }
 
@@ -1261,70 +913,20 @@
         </div>
     </div>
 
-    <!-- Модальное окно для пасхалки -->
-    <div class="easter-modal" id="easterModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="modal-close" id="modalClose">
-                    <i class="fas fa-times"></i>
-                </button>
-                <div class="modal-counter" id="easterCounter">0 Посетителей сайта нашли пасхалку</div>
-                <div class="modal-title">Дело Кαцураги Мисαто, часть 1я</div>
-                <div class="modal-subtitle">Ты в их числе! Эта сессия засчитана</div>
-            </div>
-            
-            <div class="modal-body">
-                <video class="easter-video" controls autoplay>
-                    <source src="https://pomf2.lain.la/f/u6nux6af.mp4" type="video/mp4">
-                    Ваш браузер не поддерживает видео.
-                </video>
-                <div class="modal-footer-text">
-                    Видео загружается напрямую с сервера. Наслаждайся просмотром!
-                </div>
-            </div>
-            
-            <div class="modal-footer">
-                <div class="modal-footer-text" id="sessionInfo">
-                    ID вашей сессии: <span id="sessionId"></span>
-                </div>
-                <a href="https://t.me/TypeFrag" target="_blank" class="modal-footer-link">
-                    <i class="fab fa-telegram"></i> Связаться с Type
-                </a>
-            </div>
-        </div>
-    </div>
-
     <div class="container" style="display: none;">
         <div class="header section">
             <div class="avatar-container">
                 <video class="avatar" autoplay muted loop playsinline>
-                    <source src="https://pomf2.lain.la/f/h5std6x.mp4" type="video/mp4">
+                    <source src="https://pomf2.lain.la/f/096gf9lq.mp4" type="video/mp4">
                     Ваш браузер не поддерживает видео.
                 </video>
             </div>
 
             <h1>Type</h1>
-            <a href="https://t.me/TypeFrag" target="_blank" class="username">@TypeFrag</a>
+            <a href="https://t.me/execux" target="_blank" class="username">@execux</a>
 
             <div class="typewriter-container">
                 <span id="typewriter"></span><span class="cursor"></span>
-            </div>
-        </div>
-
-        <!-- Блок твинка -->
-        <div class="twin-info section">
-            <i class="fas fa-user-secret"></i> Основной аккаунт @CodePlen заморожен<br>
-            <span class="twin-tag">Твинк аккаунт @TypeFrag</span>
-            <div style="font-size: 0.8rem; margin-top: 8px; color: var(--text-secondary);">
-                Все контакты и активность перемещены сюда
-            </div>
-        </div>
-
-        <div class="guarantor-info section">
-            <i class="fas fa-shield-alt"></i> Профессиональный гарант сделок<br>
-            <span class="price-tag">Комиссия 3% от суммы</span>
-            <div style="font-size: 0.8rem; margin-top: 8px; color: var(--text-secondary);">
-                Быстро • Надежно • Конфиденциально
             </div>
         </div>
 
@@ -1359,7 +961,7 @@
             </div>
             
             <div class="info-category">
-                <div class="category-title"><i class="fas fa-bullseye"></i> Основные направления</div>
+                <div class="category-title"><i class="fa-brands fa-codepen"></i> Основные направления</div>
                 <div class="category-content">
                     <span class="tech-tag">Разработка Telegram-ботов и модулей</span>
                     <span class="tech-tag">Веб-разработка</span>
@@ -1368,59 +970,23 @@
             </div>
             
             <div class="info-category">
-                <div class="category-title"><i class="fas fa-user"></i> О себе</div>
+                <div class="category-title"><i class="fa-solid fa-circle-info"></i> О себе</div>
                 <div class="category-content">
-                    Разработчик и создатель модулей для Telegram. Работаю над проектами в сфере автоматизации, OSINT и веб-технологий.
-                </div>
-            </div>
-        </div>
-
-        <!-- Секция проектов -->
-        <div class="projects-section section">
-            <h2 class="section-title"><i class="fas fa-rocket"></i> Проекты</h2>
-            <div class="frozen-warning">
-                <i class="fas fa-snowflake"></i> Основной аккаунт @CodePlen заморожен, некоторые проекты могли быть утеряны
-            </div>
-            
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-name">Шоп - Telegram магазин</div>
-                    <div class="project-role">ВЛАДЕЛЕЦ</div>
-                </div>
-                <div class="frozen-status-container">
-                    <span class="frozen-status"><i class="fas fa-snowflake"></i> ЗАМОРОЖЕН</span>
-                </div>
-                <div class="project-description">Telegram магазин с различными товарами. Проект заморожен вместе с основным аккаунтом.</div>
-                <div class="project-links">
-                    <a href="https://t.me/pixelrare" target="_blank" class="project-link">ПЕРЕЙТИ</a>
-                </div>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-header">
-                    <div class="project-name">Clarity</div>
-                    <div class="project-role">РАЗРАБОТЧИК • ВЛАДЕЛЕЦ</div>
-                </div>
-                <div class="frozen-status-container">
-                    <span class="frozen-status"><i class="fas fa-snowflake"></i> ЗАМОРОЖЕН</span>
-                </div>
-                <div class="project-description">Telegram Userbot Clarity - инструмент для работы с командами и Telegram API. Проект заморожен.</div>
-                <div class="project-links">
-                    <a href="https://t.me/ClarityOfficial" target="_blank" class="project-link">ПЕРЕЙТИ</a>
+                    Школьник, скрипт-кидди. Разработчик в сфере автоматизации, программирования.
                 </div>
             </div>
         </div>
 
         <!-- Секция каналов -->
         <div class="channels-section section">
-            <h2 class="section-title"><i class="fas fa-broadcast-tower"></i> Каналы и проекты</h2>
+            <h2 class="section-title"><i class="fa-brands fa-slack"></i> Каналы и проекты</h2>
             
             <div class="channel-card">
                 <div class="project-header">
                     <div class="channel-name">Type | Modules</div>
                     <div class="channel-role">РАЗРАБОТКА</div>
                 </div>
-                <div class="channel-description">Канал с модулями для Heroku Userbot и Hikka Userbot. Актуальные разработки и обновления.</div>
+                <div class="channel-description">Канал с модулями для Heroku и Hikka. Актуальные обновления.</div>
                 <div class="channel-links">
                     <a href="https://t.me/TypeModules" target="_blank" class="channel-link">ПЕРЕЙТИ В КАНАЛ</a>
                 </div>
@@ -1451,10 +1017,11 @@
 
         <!-- Секция репутации -->
         <div class="reputation-section section">
+            <h2 class="section-title"><i class="fa-solid fa-users"></i> Репутация</h2>
             <div class="reputation-card">
-                <div class="reputation-title">Репутация и отзывы</div>
+                <div class="reputation-title">Отзывы о сотрудничестве</div>
                 <div class="reputation-description">
-                    Канал с отзывами о сотрудничестве, гарантийных сделках и разработке.
+                    Канал с отзывами о сотрудничестве и сделках.
                 </div>
                 <a href="https://t.me/ArtHash1" target="_blank" class="reputation-link">Перейти к отзывам</a>
             </div>
@@ -1508,11 +1075,6 @@
                     <span><span style="color: var(--text-secondary);">TON:</span> UQBix5Y...RulJb2DN</span>
                 </div>
             </div>
-            
-            <!-- Звездочка-пасхалка -->
-            <div class="easter-egg" id="easterEgg" title="Дело Кαцураги Мисαто, часть 1я">
-                *
-            </div>
         </div>
     </div>
 
@@ -1521,11 +1083,6 @@
     </div>
 
     <script>
-        // --- Глобальные переменные для уникальной сессии ---
-        let sessionId = null;
-        let visitorCounter = 0;
-        let hasFoundEasterEgg = false;
-
         // --- Инициализация ---
         document.addEventListener('DOMContentLoaded', function() {
             initSnow();
@@ -1536,121 +1093,7 @@
             initNewYearTimer();
             initScrollAnimations();
             initVideoBackground();
-            initSessionSystem();
-            initEasterEgg();
         });
-
-        // --- Система уникальных сессий ---
-        function initSessionSystem() {
-            // Генерируем или получаем ID сессии
-            sessionId = localStorage.getItem('typefrag_session_id');
-            
-            if (!sessionId) {
-                // Создаем новый ID сессии на основе браузерных данных и времени
-                sessionId = generateSessionId();
-                localStorage.setItem('typefrag_session_id', sessionId);
-                localStorage.setItem('typefrag_session_start', Date.now());
-                
-                // Помечаем сессию как активную
-                sessionStorage.setItem('typefrag_active_session', 'true');
-            }
-            
-            // Загружаем счетчик из localStorage
-            const savedCounter = localStorage.getItem('typefrag_easter_counter');
-            visitorCounter = savedCounter ? parseInt(savedCounter) : 0;
-            
-            // Загружаем историю сессий
-            const sessionHistory = JSON.parse(localStorage.getItem('typefrag_sessions') || '[]');
-            
-            // Проверяем, была ли уже засчитана пасхалка в этой сессии
-            hasFoundEasterEgg = sessionStorage.getItem('typefrag_easter_found') === 'true';
-            
-            // Обновляем отображение счетчика
-            updateCounterDisplay();
-            
-            // Показываем ID сессии в модалке
-            document.getElementById('sessionId').textContent = sessionId.substring(0, 8) + '...';
-        }
-
-        // --- Генерация уникального ID сессии ---
-        function generateSessionId() {
-            // Собираем данные о браузере
-            const browserData = {
-                userAgent: navigator.userAgent,
-                language: navigator.language,
-                platform: navigator.platform,
-                hardwareConcurrency: navigator.hardwareConcurrency || 'unknown',
-                deviceMemory: navigator.deviceMemory || 'unknown',
-                screenRes: `${screen.width}x${screen.height}`,
-                colorDepth: screen.colorDepth,
-                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-                time: Date.now()
-            };
-            
-            // Создаем хэш из данных
-            const dataString = JSON.stringify(browserData);
-            let hash = 0;
-            
-            for (let i = 0; i < dataString.length; i++) {
-                const char = dataString.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash = hash & hash; // Convert to 32bit integer
-            }
-            
-            // Добавляем случайность
-            const random = Math.random().toString(36).substring(2, 15);
-            return `session_${Math.abs(hash).toString(36)}_${random}`;
-        }
-
-        // --- Проверка новой сессии ---
-        function isNewSession() {
-            const sessionHistory = JSON.parse(localStorage.getItem('typefrag_sessions') || '[]');
-            
-            // Проверяем, есть ли текущая сессия в истории
-            const existingSession = sessionHistory.find(s => s.id === sessionId);
-            
-            if (!existingSession) {
-                // Это новая сессия, добавляем в историю
-                const sessionData = {
-                    id: sessionId,
-                    firstVisit: Date.now(),
-                    lastVisit: Date.now(),
-                    visits: 1,
-                    foundEaster: false
-                };
-                
-                sessionHistory.push(sessionData);
-                localStorage.setItem('typefrag_sessions', JSON.stringify(sessionHistory));
-                return true;
-            } else {
-                // Обновляем данные существующей сессии
-                existingSession.lastVisit = Date.now();
-                existingSession.visits++;
-                localStorage.setItem('typefrag_sessions', JSON.stringify(sessionHistory));
-                return false;
-            }
-        }
-
-        // --- Обновление отображения счетчика ---
-        function updateCounterDisplay() {
-            const easterCounter = document.getElementById('easterCounter');
-            const lastDigit = visitorCounter % 10;
-            const lastTwoDigits = visitorCounter % 100;
-            
-            let wordForm = 'Посетителей';
-            
-            if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
-                wordForm = 'Посетителей';
-            } else if (lastDigit === 1) {
-                wordForm = 'Посетитель';
-            } else if (lastDigit >= 2 && lastDigit <= 4) {
-                wordForm = 'Посетителя';
-            } else {
-                wordForm = 'Посетителей';
-            }
-            
-            easterCounter.textContent = `${visitorCounter} ${wordForm} сайта нашли пасхалку`;
-        }
 
         // --- Снежный фон ---
         function initSnow() {
@@ -1734,12 +1177,12 @@
         // --- Тайп-райтер с обновленными фразами ---
         function initTypewriter() {
             const phrases = [
-                "Разработчик модулей для Telegram",
                 "AI-Driven Software Systems Engineer",
                 "type@root:~$ whoami",
-                "Гарант сделок | Комиссия 3%",
-                "Дело Кαцураги Мисαто, часть 1я*",
-                "Создаю и автоматизирую"
+                "Разраб что ли",
+                "Тайпик",
+                "Еблан чутка",
+                "Разработчик модулей для Telegram"
             ];
             
             const typewriter = document.getElementById('typewriter');
@@ -1895,150 +1338,6 @@
             const avatarVideo = document.querySelector('.avatar');
             if (avatarVideo) {
                 avatarVideo.playbackRate = 1.0;
-            }
-        }
-
-        // --- Пасхалка с модальным окном ---
-        function initEasterEgg() {
-            const easterEgg = document.getElementById('easterEgg');
-            const easterModal = document.getElementById('easterModal');
-            const modalClose = document.getElementById('modalClose');
-            const easterVideo = document.querySelector('.easter-video');
-            
-            // Обработчик клика по звездочке
-            easterEgg.addEventListener('click', function() {
-                let shouldIncrementCounter = false;
-                
-                // Проверяем, была ли уже найдена пасхалка в этой сессии
-                if (!hasFoundEasterEgg) {
-                    // Проверяем, новая ли это сессия
-                    const sessionHistory = JSON.parse(localStorage.getItem('typefrag_sessions') || '[]');
-                    const currentSession = sessionHistory.find(s => s.id === sessionId);
-                    
-                    if (currentSession && !currentSession.foundEaster) {
-                        // Увеличиваем счетчик
-                        visitorCounter++;
-                        localStorage.setItem('typefrag_easter_counter', visitorCounter);
-                        
-                        // Обновляем данные сессии
-                        currentSession.foundEaster = true;
-                        currentSession.easterFoundAt = Date.now();
-                        localStorage.setItem('typefrag_sessions', JSON.stringify(sessionHistory));
-                        
-                        // Помечаем пасхалку как найденную в этой сессии
-                        sessionStorage.setItem('typefrag_easter_found', 'true');
-                        hasFoundEasterEgg = true;
-                        
-                        shouldIncrementCounter = true;
-                        
-                        // Запускаем конфетти
-                        triggerConfetti();
-                    } else if (!currentSession) {
-                        // Если сессии почему-то нет в истории, создаем новую
-                        visitorCounter++;
-                        localStorage.setItem('typefrag_easter_counter', visitorCounter);
-                        
-                        const newSessionData = {
-                            id: sessionId,
-                            firstVisit: Date.now(),
-                            lastVisit: Date.now(),
-                            visits: 1,
-                            foundEaster: true,
-                            easterFoundAt: Date.now()
-                        };
-                        
-                        sessionHistory.push(newSessionData);
-                        localStorage.setItem('typefrag_sessions', JSON.stringify(sessionHistory));
-                        sessionStorage.setItem('typefrag_easter_found', 'true');
-                        hasFoundEasterEgg = true;
-                        
-                        shouldIncrementCounter = true;
-                        triggerConfetti();
-                    }
-                }
-                
-                // Обновляем отображение счетчика
-                updateCounterDisplay();
-                
-                // Показываем модальное окно
-                easterModal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Блокируем скролл
-                
-                // Автовоспроизведение видео
-                setTimeout(() => {
-                    easterVideo.play().catch(e => {
-                        console.log('Автовоспроизведение заблокировано браузером');
-                    });
-                }, 500);
-                
-                // Анимация звездочки
-                this.style.transform = 'scale(1.5) rotate(45deg)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1) rotate(0deg)';
-                }, 300);
-            });
-            
-            // Закрытие модального окна
-            modalClose.addEventListener('click', function() {
-                closeModal();
-            });
-            
-            // Закрытие по клику на фон
-            easterModal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeModal();
-                }
-            });
-            
-            // Закрытие по ESC
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && easterModal.classList.contains('active')) {
-                    closeModal();
-                }
-            });
-            
-            function closeModal() {
-                easterModal.classList.remove('active');
-                document.body.style.overflow = 'auto'; // Разблокируем скролл
-                easterVideo.pause();
-                easterVideo.currentTime = 0;
-            }
-            
-            // Функция для конфетти-эффекта
-            function triggerConfetti() {
-                // Создаем конфетти элементы
-                for (let i = 0; i < 50; i++) {
-                    createConfettiPiece();
-                }
-            }
-            
-            function createConfettiPiece() {
-                const colors = ['#ff6b6b', '#51cf66', '#38bdf8', '#ffd43b', '#a855f7'];
-                const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
-                confetti.style.width = '10px';
-                confetti.style.height = '10px';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.borderRadius = '50%';
-                confetti.style.left = `${Math.random() * 100}%`;
-                confetti.style.top = '-20px';
-                confetti.style.zIndex = '10001';
-                confetti.style.pointerEvents = 'none';
-                
-                document.body.appendChild(confetti);
-                
-                // Анимация падения
-                const animation = confetti.animate([
-                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-                    { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
-                ], {
-                    duration: 2000 + Math.random() * 2000,
-                    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
-                });
-                
-                animation.onfinish = () => {
-                    document.body.removeChild(confetti);
-                };
             }
         }
 
