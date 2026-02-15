@@ -6,9 +6,7 @@
     <title>Type | TypeFrag</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* --- Переменные и сброс --- */
         :root {
             --bg-primary: #0a0a0a;
             --bg-secondary: #111111;
@@ -57,7 +55,6 @@
             position: relative;
         }
 
-        /* Задний фон с шумом и градиентами - усилен для glassmorphism */
         body::before {
             content: "";
             position: fixed;
@@ -71,7 +68,6 @@
             z-index: -1;
         }
 
-        /* Анимированный снежный фон */
         .snow-container {
             position: fixed;
             top: 0;
@@ -89,9 +85,9 @@
             border-radius: 50%;
             opacity: 0.8;
             filter: blur(0.5px);
+            will-change: transform, opacity;
         }
 
-        /* Контейнер */
         .container {
             width: 100%;
             max-width: 480px;
@@ -102,7 +98,6 @@
             animation: fadeInUp 0.8s ease forwards;
         }
 
-        /* Оверлей с приветствием */
         #overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -149,7 +144,6 @@
             animation: fadeIn 1s ease 1.5s forwards;
         }
 
-        /* Секции с плавным появлением */
         .section {
             opacity: 0;
             transform: translateY(30px);
@@ -161,7 +155,6 @@
             transform: translateY(0);
         }
 
-        /* Шапка с аватаром */
         .header {
             position: relative;
             margin-bottom: 30px;
@@ -185,6 +178,7 @@
             transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: var(--shadow-glow);
             animation: float 6s ease-in-out infinite;
+            will-change: transform;
         }
 
         .avatar::after {
@@ -205,7 +199,6 @@
             transform: scale(1.05);
         }
 
-        /* Текстовые элементы */
         h1 {
             font-size: 2.5rem;
             margin-bottom: 8px;
@@ -238,7 +231,6 @@
             transform: translateY(-2px);
         }
 
-        /* Тайп-райтер */
         .typewriter-container {
             height: 28px;
             margin-bottom: 30px;
@@ -260,7 +252,6 @@
             vertical-align: middle;
         }
 
-        /* FAQ секция - стеклянный эффект */
         .faq-section {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -323,7 +314,6 @@
             animation: pulse 2s infinite;
         }
 
-        /* Инфо секция - стеклянный эффект */
         .info-section {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -381,7 +371,6 @@
             border: 1px solid rgba(56, 189, 248, 0.2);
         }
 
-        /* Секции проектов и каналов - стеклянный эффект */
         .projects-section, .channels-section, .reputation-section {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -492,7 +481,6 @@
             color: white;
         }
 
-        /* Карточка репутации */
         .reputation-card {
             text-align: center;
             background: rgba(16, 185, 129, 0.08);
@@ -531,7 +519,6 @@
             box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
         }
 
-        /* Новогодняя секция с стеклянным эффектом */
         .new-year-section {
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
             border: 1px solid rgba(59, 130, 246, 0.3);
@@ -544,6 +531,8 @@
             overflow: hidden;
             box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: box-shadow;
+            animation: neonGlow 4s linear infinite alternate;
         }
 
         .new-year-section:hover {
@@ -551,14 +540,22 @@
             border-color: rgba(59, 130, 246, 0.4);
         }
 
-        .new-year-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-blue);
+        @keyframes neonGlow {
+            0% {
+                box-shadow: 0 0 10px #8a2be2, 0 0 20px #4b0082, 0 0 30px #1e90ff, inset 0 0 10px #8a2be2;
+            }
+            25% {
+                box-shadow: 0 0 15px #9400d3, 0 0 25px #0000ff, 0 0 35px #00bfff, inset 0 0 12px #9400d3;
+            }
+            50% {
+                box-shadow: 0 0 10px #4169e1, 0 0 20px #1e90ff, 0 0 30px #00ffff, inset 0 0 10px #4169e1;
+            }
+            75% {
+                box-shadow: 0 0 15px #00bfff, 0 0 25px #1e90ff, 0 0 35px #8a2be2, inset 0 0 12px #00bfff;
+            }
+            100% {
+                box-shadow: 0 0 10px #4b0082, 0 0 20px #8a2be2, 0 0 30px #4169e1, inset 0 0 10px #4b0082;
+            }
         }
 
         .new-year-video-bg {
@@ -628,7 +625,6 @@
             line-height: 1.5;
         }
 
-        /* Донат секция */
         .donate-section {
             margin-top: 40px;
             padding-top: 25px;
@@ -669,7 +665,6 @@
             border-color: rgba(56, 189, 248, 0.5);
         }
 
-        /* Кошелёк Tonkeeper - стеклянный эффект */
         .wallet-box {
             display: flex;
             align-items: center;
@@ -740,7 +735,6 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        /* Анимации */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -792,7 +786,6 @@
             50% { opacity: 0.7; }
         }
 
-        /* Адаптивность */
         @media (max-width: 500px) {
             .container {
                 padding: 15px;
@@ -867,7 +860,6 @@
             }
         }
 
-        /* Индикатор скролла */
         .scroll-indicator {
             position: fixed;
             bottom: 20px;
@@ -902,10 +894,8 @@
     </style>
 </head>
 <body>
-    <!-- Снежный фон -->
     <div class="snow-container" id="snowContainer"></div>
     
-    <!-- Оверлей с приветствием -->
     <div id="overlay">
         <div class="greeting-container">
             <div class="greeting-text" id="greetingText"></div>
@@ -916,8 +906,8 @@
     <div class="container" style="display: none;">
         <div class="header section">
             <div class="avatar-container">
-                <video class="avatar" autoplay muted loop playsinline>
-                    <source src="https://pomf2.lain.la/f/096gf9lq.mp4" type="video/mp4">
+                <video class="avatar" autoplay muted loop playsinline preload="auto">
+                    <source src="https://files.catbox.moe/cu27yy.mp4" type="video/mp4">
                     Ваш браузер не поддерживает видео.
                 </video>
             </div>
@@ -977,7 +967,6 @@
             </div>
         </div>
 
-        <!-- Секция каналов -->
         <div class="channels-section section">
             <h2 class="section-title"><i class="fa-brands fa-slack"></i> Каналы и проекты</h2>
             
@@ -1015,7 +1004,6 @@
             </div>
         </div>
 
-        <!-- Секция репутации -->
         <div class="reputation-section section">
             <h2 class="section-title"><i class="fa-solid fa-users"></i> Репутация</h2>
             <div class="reputation-card">
@@ -1027,9 +1015,8 @@
             </div>
         </div>
 
-        <!-- Новогодняя секция с видео-фоном -->
         <div class="new-year-section section">
-            <video class="new-year-video-bg" autoplay muted loop playsinline>
+            <video class="new-year-video-bg" autoplay muted loop playsinline preload="metadata">
                 <source src="https://pomf2.lain.la/f/9bdraexz.mp4" type="video/mp4">
             </video>
             
@@ -1083,7 +1070,6 @@
     </div>
 
     <script>
-        // --- Инициализация ---
         document.addEventListener('DOMContentLoaded', function() {
             initSnow();
             initGreeting();
@@ -1095,10 +1081,9 @@
             initVideoBackground();
         });
 
-        // --- Снежный фон ---
         function initSnow() {
             const container = document.getElementById('snowContainer');
-            const snowflakeCount = 80;
+            const snowflakeCount = 50;
             
             for (let i = 0; i < snowflakeCount; i++) {
                 createSnowflake(container);
@@ -1118,6 +1103,7 @@
                 flake.style.left = `${startX}%`;
                 flake.style.opacity = Math.random() * 0.5 + 0.3;
                 flake.style.animation = `snowFall ${duration}s linear ${delay}s infinite`;
+                flake.style.willChange = 'transform';
                 
                 container.appendChild(flake);
                 
@@ -1128,7 +1114,6 @@
             }
         }
 
-        // --- Приветствие в зависимости от времени суток ---
         function initGreeting() {
             const overlay = document.getElementById('overlay');
             const greetingText = document.getElementById('greetingText');
@@ -1149,7 +1134,6 @@
             
             greetingText.textContent = greeting;
             
-            // Обработчик клика по оверлею
             overlay.addEventListener('click', () => {
                 overlay.classList.add('fade-out');
                 
@@ -1157,7 +1141,6 @@
                     overlay.style.display = 'none';
                     container.style.display = 'block';
                     
-                    // Запускаем анимацию появления всех секций
                     document.querySelectorAll('.section').forEach((section, index) => {
                         setTimeout(() => {
                             section.classList.add('visible');
@@ -1166,7 +1149,6 @@
                 }, 1000);
             });
             
-            // Вход по клавише
             document.addEventListener('keydown', (e) => {
                 if (e.code === 'Enter' || e.code === 'Space') {
                     overlay.click();
@@ -1174,7 +1156,6 @@
             });
         }
 
-        // --- Тайп-райтер с обновленными фразами ---
         function initTypewriter() {
             const phrases = [
                 "AI-Driven Software Systems Engineer",
@@ -1220,7 +1201,6 @@
             setTimeout(type, 1000);
         }
 
-        // --- Копирование кошелька ---
         function initCopyWallet() {
             const walletBox = document.getElementById('walletBox');
             const walletFull = 'UQBix5YrlgWgBpfv2Q1uUav2GDv_b1JxoB9l9rwdRulJb2DN';
@@ -1229,19 +1209,14 @@
                 navigator.clipboard.writeText(walletFull).then(() => {
                     this.classList.add('copied');
                     
-                    // Анимация
                     this.style.transform = 'scale(1.05)';
                     setTimeout(() => {
                         this.style.transform = 'scale(1)';
+                        this.classList.remove('copied');
                     }, 300);
                     
-                    // Сброс tooltip через 2 секунды
-                    setTimeout(() => {
-                        this.classList.remove('copied');
-                    }, 2000);
                 }).catch(err => {
                     console.error('Ошибка копирования: ', err);
-                    // Fallback для старых браузеров
                     const textArea = document.createElement('textarea');
                     textArea.value = walletFull;
                     document.body.appendChild(textArea);
@@ -1250,21 +1225,15 @@
                     document.body.removeChild(textArea);
                     
                     this.classList.add('copied');
+                    this.style.transform = 'scale(1.05)';
                     setTimeout(() => {
-                        this.style.transform = 'scale(1.05)';
-                        setTimeout(() => {
-                            this.style.transform = 'scale(1)';
-                        }, 300);
-                    }, 100);
-                    
-                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
                         this.classList.remove('copied');
-                    }, 2000);
+                    }, 300);
                 });
             });
         }
 
-        // --- Новогодний таймер ---
         function initNewYearTimer() {
             const daysEl = document.getElementById('days');
             const hoursEl = document.getElementById('hours');
@@ -1274,35 +1243,9 @@
             function updateTimer() {
                 const now = new Date();
                 const currentYear = now.getFullYear();
-                
-                // Определяем следующий Новый Год
-                let nextYear = currentYear;
-                const currentMonth = now.getMonth();
-                const currentDay = now.getDate();
-                
-                // Если сегодня после 31 декабря, то следующий Новый Год в следующем году
-                // Если сегодня 1 января, то показываем до следующего года
-                if (currentMonth === 11 && currentDay > 31) {
-                    nextYear = currentYear + 1;
-                } else if (currentMonth === 0 && currentDay === 1) {
-                    // Если сегодня 1 января, показываем до следующего года
-                    nextYear = currentYear + 1;
-                }
-                
-                const newYear = new Date(nextYear, 0, 1, 0, 0, 0, 0);
+                const newYear = new Date(currentYear + 1, 0, 1, 0, 0, 0, 0);
                 const diff = newYear - now;
                 
-                // Если diff отрицательный (НГ уже прошел в этом году), считаем до следующего
-                if (diff < 0) {
-                    const nextNewYear = new Date(currentYear + 1, 0, 1, 0, 0, 0, 0);
-                    const newDiff = nextNewYear - now;
-                    calculateTime(newDiff);
-                } else {
-                    calculateTime(diff);
-                }
-            }
-            
-            function calculateTime(diff) {
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -1313,7 +1256,6 @@
                 minutesEl.textContent = String(minutes).padStart(2, '0');
                 secondsEl.textContent = String(seconds).padStart(2, '0');
                 
-                // Анимация при смене секунд
                 if (seconds === 59) {
                     secondsEl.style.animation = 'timerPulse 0.3s ease';
                     setTimeout(() => {
@@ -1326,21 +1268,18 @@
             setInterval(updateTimer, 1000);
         }
 
-        // --- Инициализация видео-фона ---
         function initVideoBackground() {
             const video = document.querySelector('.new-year-video-bg');
             if (video) {
-                video.playbackRate = 0.7; // Замедляем видео для более плавного эффекта
+                video.playbackRate = 0.7;
             }
             
-            // Также для аватара
             const avatarVideo = document.querySelector('.avatar');
             if (avatarVideo) {
                 avatarVideo.playbackRate = 1.0;
             }
         }
 
-        // --- Плавные анимации при скролле ---
         function initScrollAnimations() {
             const sections = document.querySelectorAll('.section');
             
@@ -1360,7 +1299,6 @@
             });
         }
 
-        // --- Индикатор скролла ---
         function initScrollIndicator() {
             const scrollIndicator = document.getElementById('scrollIndicator');
             
@@ -1381,4 +1319,4 @@
         }
     </script>
 </body>
-    </html>
+                    </html>
