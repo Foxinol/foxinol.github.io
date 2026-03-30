@@ -50,8 +50,45 @@
       border-color: rgba(183, 126, 255, 0.5);
       box-shadow: 0 0 20px rgba(155, 77, 255, 0.2);
     }
-    h1 { font-size: 2rem; margin-bottom: 1rem; background: linear-gradient(135deg, #b77eff, #9b4dff); -webkit-background-clip: text; background-clip: text; color: transparent; display: flex; align-items: center; gap: 0.5rem; }
-    input, textarea, button, .image-upload {
+    h1 { font-size: 2rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, #b77eff, #9b4dff); -webkit-background-clip: text; background-clip: text; color: transparent; display: flex; align-items: center; gap: 0.5rem; }
+    .field-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .field-row input {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      color: var(--text-primary);
+      font-family: inherit;
+      transition: 0.2s;
+    }
+    .field-row input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .attach-btn {
+      background: rgba(183, 126, 255, 0.15);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+      width: 44px;
+      height: 44px;
+    }
+    .attach-btn:hover {
+      background: rgba(183, 126, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    textarea {
       width: 100%;
       padding: 0.75rem 1rem;
       margin-bottom: 1rem;
@@ -61,55 +98,51 @@
       color: var(--text-primary);
       font-family: inherit;
       transition: 0.2s;
-    }
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-    textarea {
       min-height: 300px;
       resize: vertical;
     }
-    button, .image-upload {
-      background: rgba(183, 126, 255, 0.15);
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .image-preview {
+      max-width: 100%;
+      border-radius: 16px;
+      margin: 0.5rem 0 1rem 0;
+      display: none;
+    }
+    .publish-btn {
+      background: rgba(183, 126, 255, 0.2);
+      border: 1px solid var(--accent);
+      border-radius: 16px;
+      padding: 0.75rem 1rem;
+      width: 100%;
+      color: white;
+      font-weight: 600;
       cursor: pointer;
+      transition: 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      font-weight: 500;
     }
-    button:hover, .image-upload:hover {
-      background: rgba(183, 126, 255, 0.3);
+    .publish-btn:hover {
+      background: rgba(183, 126, 255, 0.4);
       transform: translateY(-2px);
     }
     .slug-preview {
       font-size: 0.85rem;
       color: var(--accent);
-      margin-top: -0.5rem;
       margin-bottom: 1rem;
+      padding-left: 0.5rem;
     }
-    .image-preview {
-      max-width: 100%;
-      border-radius: 16px;
-      margin: 0.5rem 0;
-      display: none;
-    }
-    .footer {
+    .status {
+      margin-top: 1rem;
+      padding: 0.5rem;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.4);
       text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--glass-border);
-      position: relative;
-      z-index: 1;
     }
-    .footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    .footer a:hover { text-decoration: underline; }
     .back-link {
       display: inline-block;
       margin-bottom: 1rem;
@@ -126,18 +159,32 @@
       border-radius: 12px;
       margin: 1rem 0;
     }
-    .status { margin-top: 1rem; padding: 0.5rem; border-radius: 12px; background: rgba(0,0,0,0.4); text-align: center; }
-    @media (max-width: 700px) { .container { margin: 1rem; padding: 1.25rem; } }
+    .footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--glass-border);
+      position: relative;
+      z-index: 1;
+    }
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover { text-decoration: underline; }
+    @media (max-width: 700px) {
+      .container { margin: 1rem; padding: 1.25rem; }
+    }
   </style>
 </head>
 <body>
 <canvas id="stars-canvas"></canvas>
 <div class="container" id="app"></div>
 <div class="footer">
-  <i class="fas fa-copyright"></i> Концепция взята с Telegraph.<br>
-  <i class="fas fa-shield-alt"></i> Владелец домена не отвечает за публикуемый контент и пособия (статьи).<br>
-  <i class="fab fa-telegram"></i> Telegram для связи — <a href="https://t.me/execuxc" target="_blank">@execuxc</a><br>
-  <i class="fas fa-globe"></i> Сайт автора — <a href="https://codeplen.ru" target="_blank">codeplen.ru</a>
+  Концепция взята с Telegraph. Владелец домена не отвечает за публикуемый контент.<br>
+  <a href="https://t.me/execuxc" target="_blank">@execuxc</a> · <a href="https://codeplen.ru" target="_blank">codeplen.ru</a>
 </div>
 
 <script type="importmap">
@@ -155,13 +202,14 @@
   import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp } from 'firebase/firestore';
   import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
+  // Конфиг Firebase
   const firebaseConfig = {
     apiKey: "AIzaSyAXUdd72BEUAZ3vveRH15Hx4tMiuGtcIuY",
     authDomain: "tphg-987cc.firebaseapp.com",
-    projectId: "phpg-987cc",
+    projectId: "tphg-987cc",
     storageBucket: "tphg-987cc.firebasestorage.app",
     messagingSenderId: "539350204630",
-    appId: "1:539350204630:web:98868b68b0d4816e940977"
+    appId: "1:539350204630:web:98868b6b8b0d4816e940977"
   };
 
   const app = initializeApp(firebaseConfig);
@@ -172,10 +220,10 @@
   const slugMatch = path.match(/^\/tph-link\/([^\/]+)$/);
   const container = document.getElementById('app');
 
-  if (!slugMatch) {
-    renderEditor();
-  } else {
+  if (slugMatch) {
     loadArticle(slugMatch[1]);
+  } else {
+    renderEditor();
   }
 
   async function loadArticle(slug) {
@@ -199,25 +247,25 @@
   function renderEditor() {
     container.innerHTML = `
       <h1><i class="fas fa-feather-alt"></i> Создать статью</h1>
-      <div class="editor">
+      <div class="field-row">
         <input type="text" id="title" placeholder="Заголовок статьи" autocomplete="off">
-        <div class="slug-preview" id="slugPreview"></div>
-        <textarea id="content" placeholder="Текст статьи. Поддерживает HTML-теги, ссылки, изображения..."></textarea>
-        <div class="image-upload" id="imageUpload">
-          <i class="fas fa-image"></i> Прикрепить изображение (кликните)
-          <input type="file" id="imageFile" accept="image/*" style="display: none;">
+        <div class="attach-btn" id="attachBtn">
+          <i class="fas fa-paperclip"></i>
         </div>
-        <img id="imagePreview" class="image-preview">
-        <button id="publishBtn"><i class="fas fa-cloud-upload-alt"></i> Опубликовать</button>
-        <div id="status" class="status"></div>
+        <input type="file" id="imageFile" accept="image/*" style="display: none;">
       </div>
+      <div class="slug-preview" id="slugPreview"></div>
+      <textarea id="content" placeholder="Текст статьи. Поддерживает HTML-теги, ссылки, изображения..."></textarea>
+      <img id="imagePreview" class="image-preview">
+      <button class="publish-btn" id="publishBtn"><i class="fas fa-cloud-upload-alt"></i> Опубликовать</button>
+      <div id="status" class="status"></div>
     `;
 
     const titleInput = document.getElementById('title');
     const slugPreview = document.getElementById('slugPreview');
     const contentTextarea = document.getElementById('content');
+    const attachBtn = document.getElementById('attachBtn');
     const imageFileInput = document.getElementById('imageFile');
-    const imageUploadDiv = document.getElementById('imageUpload');
     const imagePreview = document.getElementById('imagePreview');
     const publishBtn = document.getElementById('publishBtn');
     const statusDiv = document.getElementById('status');
@@ -237,15 +285,15 @@
       slugPreview.textContent = slug ? `Ссылка: /tph-link/${slug}` : '';
     });
 
-    imageUploadDiv.addEventListener('click', () => imageFileInput.click());
+    attachBtn.addEventListener('click', () => imageFileInput.click());
     imageFileInput.addEventListener('change', async (e) => {
       const file = e.target.files[0];
       if (!file) return;
       if (file.size > 10 * 1024 * 1024) {
-        statusDiv.innerHTML = '<i class="fas fa-ban"></i> Файл больше 10 МБ. Пока ограничение 10 МБ.';
+        statusDiv.innerHTML = '<i class="fas fa-ban"></i> Файл больше 10 МБ.';
         return;
       }
-      statusDiv.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Загрузка изображения...';
+      statusDiv.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Загрузка...';
       const storageRef = ref(storage, `articles/${Date.now()}_${file.name}`);
       try {
         const snapshot = await uploadBytes(storageRef, file);
@@ -254,6 +302,7 @@
         imagePreview.style.display = 'block';
         statusDiv.innerHTML = '<i class="fas fa-check-circle"></i> Изображение загружено.';
       } catch (error) {
+        console.error(error);
         statusDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Ошибка загрузки.';
       }
     });
@@ -287,8 +336,10 @@
         imagePreview.style.display = 'none';
         uploadedImageUrl = null;
         slugPreview.textContent = '';
+        imageFileInput.value = '';
       } catch (error) {
-        statusDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Ошибка публикации.';
+        console.error(error);
+        statusDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Ошибка публикации. Проверьте консоль.';
       }
     });
   }
@@ -302,6 +353,7 @@
     });
   }
 
+  // Звёздный фон
   function initStars() {
     const canvas = document.getElementById('stars-canvas');
     if (!canvas) return;
