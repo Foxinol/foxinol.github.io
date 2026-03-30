@@ -1,1 +1,350 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Type · TPH</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --glass-bg: rgba(10, 10, 25, 0.6);
+      --glass-border: rgba(183, 126, 255, 0.25);
+      --accent: #b77eff;
+      --text-primary: #ffffff;
+      --text-secondary: #c0c0e0;
+      --danger: #ef4444;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #03030c;
+      color: var(--text-primary);
+      min-height: 100vh;
+      position: relative;
+    }
+    #stars-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      display: block;
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+    .container:hover {
+      border-color: rgba(183, 126, 255, 0.5);
+      box-shadow: 0 0 20px rgba(155, 77, 255, 0.2);
+    }
+    h1 { font-size: 2rem; margin-bottom: 1rem; background: linear-gradient(135deg, #b77eff, #9b4dff); -webkit-background-clip: text; background-clip: text; color: transparent; display: flex; align-items: center; gap: 0.5rem; }
+    input, textarea, button, .image-upload {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1rem;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      color: var(--text-primary);
+      font-family: inherit;
+      transition: 0.2s;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    textarea {
+      min-height: 300px;
+      resize: vertical;
+    }
+    button, .image-upload {
+      background: rgba(183, 126, 255, 0.15);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-weight: 500;
+    }
+    button:hover, .image-upload:hover {
+      background: rgba(183, 126, 255, 0.3);
+      transform: translateY(-2px);
+    }
+    .slug-preview {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-top: -0.5rem;
+      margin-bottom: 1rem;
+    }
+    .image-preview {
+      max-width: 100%;
+      border-radius: 16px;
+      margin: 0.5rem 0;
+      display: none;
+    }
+    .footer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--glass-border);
+      position: relative;
+      z-index: 1;
+    }
+    .footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .footer a:hover { text-decoration: underline; }
+    .back-link {
+      display: inline-block;
+      margin-bottom: 1rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .back-link i { margin-right: 0.3rem; }
+    .article-content {
+      line-height: 1.7;
+      margin-top: 1rem;
+    }
+    .article-content img {
+      max-width: 100%;
+      border-radius: 12px;
+      margin: 1rem 0;
+    }
+    .status { margin-top: 1rem; padding: 0.5rem; border-radius: 12px; background: rgba(0,0,0,0.4); text-align: center; }
+    @media (max-width: 700px) { .container { margin: 1rem; padding: 1.25rem; } }
+  </style>
+</head>
+<body>
+<canvas id="stars-canvas"></canvas>
+<div class="container" id="app"></div>
+<div class="footer">
+  <i class="fas fa-copyright"></i> Концепция взята с Telegraph.<br>
+  <i class="fas fa-shield-alt"></i> Владелец домена не отвечает за публикуемый контент и пособия (статьи).<br>
+  <i class="fab fa-telegram"></i> Telegram для связи — <a href="https://t.me/execuxc" target="_blank">@execuxc</a><br>
+  <i class="fas fa-globe"></i> Сайт автора — <a href="https://codeplen.ru" target="_blank">codeplen.ru</a>
+</div>
 
+<script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js",
+      "firebase/firestore": "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js",
+      "firebase/storage": "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js"
+    }
+  }
+</script>
+
+<script type="module">
+  import { initializeApp } from 'firebase/app';
+  import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp } from 'firebase/firestore';
+  import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAXUdd72BEUAZ3vveRH15Hx4tMiuGtcIuY",
+    authDomain: "tphg-987cc.firebaseapp.com",
+    projectId: "phpg-987cc",
+    storageBucket: "tphg-987cc.firebasestorage.app",
+    messagingSenderId: "539350204630",
+    appId: "1:539350204630:web:98868b68b0d4816e940977"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const storage = getStorage(app);
+
+  const path = window.location.pathname;
+  const slugMatch = path.match(/^\/tph-link\/([^\/]+)$/);
+  const container = document.getElementById('app');
+
+  if (!slugMatch) {
+    renderEditor();
+  } else {
+    loadArticle(slugMatch[1]);
+  }
+
+  async function loadArticle(slug) {
+    const q = query(collection(db, 'articles'), where('slug', '==', slug));
+    const snapshot = await getDocs(q);
+    if (snapshot.empty) {
+      container.innerHTML = `
+        <a href="/tph-link/" class="back-link"><i class="fas fa-arrow-left"></i> Создать новую</a>
+        <h1><i class="fas fa-exclamation-triangle"></i> Статья не найдена</h1>
+      `;
+      return;
+    }
+    const data = snapshot.docs[0].data();
+    container.innerHTML = `
+      <a href="/tph-link/" class="back-link"><i class="fas fa-arrow-left"></i> Создать новую</a>
+      <h1><i class="fas fa-newspaper"></i> ${escapeHtml(data.title)}</h1>
+      <div class="article-content">${data.content}</div>
+    `;
+  }
+
+  function renderEditor() {
+    container.innerHTML = `
+      <h1><i class="fas fa-feather-alt"></i> Создать статью</h1>
+      <div class="editor">
+        <input type="text" id="title" placeholder="Заголовок статьи" autocomplete="off">
+        <div class="slug-preview" id="slugPreview"></div>
+        <textarea id="content" placeholder="Текст статьи. Поддерживает HTML-теги, ссылки, изображения..."></textarea>
+        <div class="image-upload" id="imageUpload">
+          <i class="fas fa-image"></i> Прикрепить изображение (кликните)
+          <input type="file" id="imageFile" accept="image/*" style="display: none;">
+        </div>
+        <img id="imagePreview" class="image-preview">
+        <button id="publishBtn"><i class="fas fa-cloud-upload-alt"></i> Опубликовать</button>
+        <div id="status" class="status"></div>
+      </div>
+    `;
+
+    const titleInput = document.getElementById('title');
+    const slugPreview = document.getElementById('slugPreview');
+    const contentTextarea = document.getElementById('content');
+    const imageFileInput = document.getElementById('imageFile');
+    const imageUploadDiv = document.getElementById('imageUpload');
+    const imagePreview = document.getElementById('imagePreview');
+    const publishBtn = document.getElementById('publishBtn');
+    const statusDiv = document.getElementById('status');
+
+    let uploadedImageUrl = null;
+
+    function slugify(text) {
+      return text.toString().toLowerCase().trim()
+        .replace(/[^\w\s-а-яё]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .slice(0, 100);
+    }
+
+    titleInput.addEventListener('input', () => {
+      const slug = slugify(titleInput.value);
+      slugPreview.textContent = slug ? `Ссылка: /tph-link/${slug}` : '';
+    });
+
+    imageUploadDiv.addEventListener('click', () => imageFileInput.click());
+    imageFileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      if (file.size > 10 * 1024 * 1024) {
+        statusDiv.innerHTML = '<i class="fas fa-ban"></i> Файл больше 10 МБ. Пока ограничение 10 МБ.';
+        return;
+      }
+      statusDiv.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Загрузка изображения...';
+      const storageRef = ref(storage, `articles/${Date.now()}_${file.name}`);
+      try {
+        const snapshot = await uploadBytes(storageRef, file);
+        uploadedImageUrl = await getDownloadURL(snapshot.ref);
+        imagePreview.src = uploadedImageUrl;
+        imagePreview.style.display = 'block';
+        statusDiv.innerHTML = '<i class="fas fa-check-circle"></i> Изображение загружено.';
+      } catch (error) {
+        statusDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Ошибка загрузки.';
+      }
+    });
+
+    publishBtn.addEventListener('click', async () => {
+      const title = titleInput.value.trim();
+      let content = contentTextarea.value.trim();
+      if (!title || !content) {
+        statusDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Заполните заголовок и текст.';
+        return;
+      }
+      const slug = slugify(title);
+      if (!slug) {
+        statusDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Некорректный заголовок.';
+        return;
+      }
+      if (uploadedImageUrl) {
+        const imgHtml = `<div><img src="${uploadedImageUrl}" style="max-width:100%; border-radius:12px; margin:1rem 0;"></div>`;
+        content = imgHtml + content;
+      }
+      try {
+        await addDoc(collection(db, 'articles'), {
+          title,
+          slug,
+          content,
+          createdAt: serverTimestamp()
+        });
+        statusDiv.innerHTML = `<i class="fas fa-check-circle"></i> Статья опубликована! <a href="/tph-link/${slug}" target="_blank">Перейти</a>`;
+        titleInput.value = '';
+        contentTextarea.value = '';
+        imagePreview.style.display = 'none';
+        uploadedImageUrl = null;
+        slugPreview.textContent = '';
+      } catch (error) {
+        statusDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Ошибка публикации.';
+      }
+    });
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  function initStars() {
+    const canvas = document.getElementById('stars-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let stars = [];
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      initStarsArray();
+    }
+    function initStarsArray() {
+      stars = [];
+      const starCount = Math.floor((width * height) / 4000);
+      for (let i = 0; i < starCount; i++) {
+        stars.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 1.5,
+          alpha: Math.random() * 0.7 + 0.3,
+          speed: 0.02 + Math.random() * 0.03
+        });
+      }
+    }
+    function draw() {
+      ctx.clearRect(0, 0, width, height);
+      for (let s of stars) {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${s.alpha})`;
+        ctx.fill();
+        s.y += s.speed;
+        if (s.y > height) s.y = 0;
+      }
+      requestAnimationFrame(draw);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    draw();
+  }
+  initStars();
+</script>
+</body>
+</html>
