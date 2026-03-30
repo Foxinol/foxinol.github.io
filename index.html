@@ -2,34 +2,33 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Type | About me</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #111111;
-            --bg-glass: rgba(255, 255, 255, 0.05);
+            --bg-primary: #050510;
+            --bg-secondary: #0a0a20;
+            --bg-glass: rgba(15, 15, 35, 0.45);
             --bg-glass-light: rgba(255, 255, 255, 0.08);
             --bg-glass-medium: rgba(255, 255, 255, 0.12);
-            --bg-card: rgba(30, 30, 30, 0.7);
+            --bg-card: rgba(20, 20, 40, 0.6);
             --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --accent-primary: #38bdf8;
-            --accent-secondary: #0ea5e9;
-            --accent-tertiary: #0284c7;
+            --text-secondary: #c0c0e0;
+            --accent-primary: #b77eff;
+            --accent-secondary: #9b4dff;
+            --accent-tertiary: #7b2cbf;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
-            --border-light: rgba(255, 255, 255, 0.08);
-            --border-medium: rgba(255, 255, 255, 0.12);
-            --shadow-glow: 0 0 30px rgba(56, 189, 248, 0.2);
-            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.5);
-            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.4);
-            --gradient-accent: linear-gradient(135deg, #38bdf8, #0ea5e9, #0284c7);
-            --gradient-blue: linear-gradient(135deg, #38bdf8, #3b82f6, #2563eb);
-            --frozen-blue: #38bdf8;
+            --border-light: rgba(255, 255, 255, 0.15);
+            --border-medium: rgba(255, 255, 255, 0.2);
+            --shadow-glow: 0 0 30px rgba(155, 77, 255, 0.4);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --gradient-accent: linear-gradient(135deg, #b77eff, #9b4dff, #7b2cbf);
+            --gradient-blue: linear-gradient(135deg, #b77eff, #9b4dff, #7b2cbf);
         }
 
         * {
@@ -44,7 +43,7 @@
         }
 
         body {
-            background-color: var(--bg-primary);
+            background-color: #03030c;
             color: var(--text-primary);
             font-family: 'Inter', 'JetBrains Mono', monospace;
             display: flex;
@@ -55,17 +54,26 @@
             position: relative;
         }
 
-        body::before {
-            content: "";
+        #planet-canvas {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(37, 99, 235, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 60%),
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
             pointer-events: none;
-            z-index: -1;
+            display: block;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 480px;
+            padding: 20px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
         }
 
         .snow-container {
@@ -75,7 +83,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -1;
+            z-index: 1;
             overflow: hidden;
         }
 
@@ -83,25 +91,16 @@
             position: absolute;
             background: white;
             border-radius: 50%;
-            opacity: 0.8;
+            opacity: 0.5;
             filter: blur(0.5px);
-            will-change: transform, opacity;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 480px;
-            padding: 20px;
-            text-align: center;
-            z-index: 1;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease forwards;
+            will-change: transform;
         }
 
         #overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-primary);
+            background: rgba(3, 3, 12, 0.95);
+            backdrop-filter: blur(20px);
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -126,7 +125,7 @@
         .greeting-text {
             font-size: 2rem;
             margin-bottom: 20px;
-            background: var(--gradient-blue);
+            background: var(--gradient-accent);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -172,27 +171,13 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid transparent;
-            background: var(--gradient-blue) border-box;
+            border: 3px solid rgba(183, 126, 255, 0.5);
+            background: rgba(0,0,0,0.3);
             position: relative;
             transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: var(--shadow-glow);
             animation: float 6s ease-in-out infinite;
             will-change: transform;
-        }
-
-        .avatar::after {
-            content: '';
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
-            background: var(--gradient-blue);
-            border-radius: 50%;
-            z-index: -1;
-            opacity: 0.3;
-            filter: blur(12px);
         }
 
         .avatar:hover {
@@ -202,7 +187,7 @@
         h1 {
             font-size: 2.5rem;
             margin-bottom: 8px;
-            background: var(--gradient-blue);
+            background: var(--gradient-accent);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -226,7 +211,7 @@
         }
 
         .username:hover {
-            background: rgba(56, 189, 248, 0.1);
+            background: rgba(183, 126, 255, 0.2);
             border-color: var(--accent-primary);
             transform: translateY(-2px);
         }
@@ -252,28 +237,39 @@
             vertical-align: middle;
         }
 
-        .faq-section {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .faq-section,
+        .info-section,
+        .projects-section,
+        .channels-section,
+        .reputation-section,
+        .new-year-section {
+            background: rgba(10, 10, 25, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(183, 126, 255, 0.25);
+            border-radius: 24px;
             padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(15px) saturate(180%);
-            -webkit-backdrop-filter: blur(15px) saturate(180%);
-            box-shadow: var(--shadow-glass);
+            margin-bottom: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .faq-section:hover {
-            transform: scale(1.02);
-            border-color: rgba(255, 255, 255, 0.15);
+        .faq-section:hover,
+        .info-section:hover,
+        .projects-section:hover,
+        .channels-section:hover,
+        .reputation-section:hover,
+        .new-year-section:hover {
+            transform: translateY(-5px);
+            border-color: rgba(183, 126, 255, 0.5);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(155, 77, 255, 0.3);
         }
 
         .faq-item {
             text-align: left;
             margin-bottom: 15px;
             padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .faq-item:last-child {
@@ -292,10 +288,6 @@
             gap: 8px;
         }
 
-        .faq-question i {
-            font-size: 0.8rem;
-        }
-
         .faq-answer {
             color: var(--text-secondary);
             font-size: 0.85rem;
@@ -304,31 +296,14 @@
 
         .response-time {
             display: inline-block;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(59, 130, 246, 0.1));
+            background: rgba(16, 185, 129, 0.15);
             color: var(--success);
             padding: 3px 8px;
             border-radius: 6px;
             font-size: 0.8rem;
             margin: 2px;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3);
             animation: pulse 2s infinite;
-        }
-
-        .info-section {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(15px) saturate(180%);
-            -webkit-backdrop-filter: blur(15px) saturate(180%);
-            box-shadow: var(--shadow-glass);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .info-section:hover {
-            transform: scale(1.02);
-            border-color: rgba(255, 255, 255, 0.15);
         }
 
         .info-category {
@@ -350,10 +325,6 @@
             gap: 8px;
         }
 
-        .category-title i {
-            font-size: 0.8rem;
-        }
-
         .category-content {
             color: var(--text-secondary);
             font-size: 0.85rem;
@@ -362,31 +333,13 @@
 
         .tech-tag {
             display: inline-block;
-            background: rgba(56, 189, 248, 0.1);
+            background: rgba(183, 126, 255, 0.15);
             color: var(--accent-primary);
             padding: 3px 8px;
             border-radius: 6px;
             font-size: 0.8rem;
             margin: 2px;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-        }
-
-        .projects-section, .channels-section, .reputation-section {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            backdrop-filter: blur(15px) saturate(180%);
-            -webkit-backdrop-filter: blur(15px) saturate(180%);
-            box-shadow: var(--shadow-glass);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            text-align: left;
-        }
-
-        .projects-section:hover, .channels-section:hover, .reputation-section:hover {
-            transform: scale(1.02);
-            border-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(183, 126, 255, 0.3);
         }
 
         .section-title {
@@ -401,68 +354,76 @@
             gap: 10px;
         }
 
-        .section-title i {
-            font-size: 1rem;
-        }
-
-        .project-card, .channel-card, .reputation-card {
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
+        .project-card,
+        .channel-card,
+        .reputation-card,
+        .notice-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(183, 126, 255, 0.2);
+            border-radius: 16px;
             padding: 18px;
             margin-bottom: 15px;
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
         }
 
-        .project-card:hover, .channel-card:hover, .reputation-card:hover {
+        .project-card:hover,
+        .channel-card:hover,
+        .reputation-card:hover,
+        .notice-card:hover {
             border-color: var(--accent-primary);
             transform: translateY(-2px);
+            background: rgba(0, 0, 0, 0.4);
         }
 
-        .project-card:last-child, .channel-card:last-child {
-            margin-bottom: 0;
-        }
-
-        .project-header, .channel-header {
+        .project-header,
+        .channel-header {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             margin-bottom: 10px;
+            gap: 12px;
         }
 
-        .project-name, .channel-name {
+        .project-name,
+        .channel-name {
             font-weight: 700;
             font-size: 1rem;
             color: var(--text-primary);
-            flex: 1;
-            margin-right: 10px;
+            word-break: break-word;
         }
 
-        .project-role, .channel-role {
+        .project-role,
+        .channel-role {
             font-size: 0.75rem;
             color: var(--accent-primary);
-            background: rgba(56, 189, 248, 0.1);
+            background: rgba(183, 126, 255, 0.15);
             padding: 3px 8px;
-            border-radius: 10px;
+            border-radius: 20px;
             font-weight: 600;
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
-        .project-description, .channel-description {
+        .project-description,
+        .channel-description {
             color: var(--text-secondary);
             font-size: 0.85rem;
             margin-bottom: 15px;
             line-height: 1.4;
+            word-break: break-word;
+            text-align: left;
         }
 
-        .project-links, .channel-links {
+        .project-links,
+        .channel-links {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
 
-        .project-link, .channel-link {
+        .project-link,
+        .channel-link {
             color: var(--accent-primary);
             font-size: 0.8rem;
             text-decoration: none;
@@ -472,19 +433,40 @@
             transition: all 0.3s ease;
             font-weight: 500;
             display: inline-block;
-            text-align: center;
-            background: rgba(56, 189, 248, 0.05);
+            background: rgba(183, 126, 255, 0.05);
+            backdrop-filter: blur(4px);
         }
 
-        .project-link:hover, .channel-link:hover {
+        .project-link:hover,
+        .channel-link:hover {
             background: var(--accent-primary);
             color: white;
+            box-shadow: 0 0 10px var(--accent-primary);
+        }
+
+        .notice-card {
+            text-align: center;
+            background: rgba(245, 158, 11, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .notice-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--warning);
+            margin-bottom: 8px;
+        }
+
+        .notice-description {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
         }
 
         .reputation-card {
             text-align: center;
             background: rgba(16, 185, 129, 0.08);
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3);
         }
 
         .reputation-title {
@@ -520,42 +502,9 @@
         }
 
         .new-year-section {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            padding: 25px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(15px) saturate(180%);
-            -webkit-backdrop-filter: blur(15px) saturate(180%);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 40px rgba(59, 130, 246, 0.2);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: box-shadow;
-            animation: neonGlow 4s linear infinite alternate;
-        }
-
-        .new-year-section:hover {
-            transform: scale(1.02);
-            border-color: rgba(59, 130, 246, 0.4);
-        }
-
-        @keyframes neonGlow {
-            0% {
-                box-shadow: 0 0 10px #8a2be2, 0 0 20px #4b0082, 0 0 30px #1e90ff, inset 0 0 10px #8a2be2;
-            }
-            25% {
-                box-shadow: 0 0 15px #9400d3, 0 0 25px #0000ff, 0 0 35px #00bfff, inset 0 0 12px #9400d3;
-            }
-            50% {
-                box-shadow: 0 0 10px #4169e1, 0 0 20px #1e90ff, 0 0 30px #00ffff, inset 0 0 10px #4169e1;
-            }
-            75% {
-                box-shadow: 0 0 15px #00bfff, 0 0 25px #1e90ff, 0 0 35px #8a2be2, inset 0 0 12px #00bfff;
-            }
-            100% {
-                box-shadow: 0 0 10px #4b0082, 0 0 20px #8a2be2, 0 0 30px #4169e1, inset 0 0 10px #4b0082;
-            }
+            backdrop-filter: blur(12px);
         }
 
         .new-year-video-bg {
@@ -567,7 +516,7 @@
             object-fit: cover;
             opacity: 0.2;
             z-index: 0;
-            border-radius: 16px;
+            border-radius: 24px;
         }
 
         .new-year-content {
@@ -588,6 +537,7 @@
             justify-content: center;
             gap: 10px;
             margin-bottom: 15px;
+            flex-wrap: wrap;
         }
 
         .timer-unit {
@@ -605,7 +555,7 @@
             border-radius: 12px;
             padding: 10px;
             min-width: 70px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
+            border: 1px solid rgba(183, 126, 255, 0.5);
             color: var(--accent-primary);
             backdrop-filter: blur(5px);
         }
@@ -628,7 +578,7 @@
         .donate-section {
             margin-top: 40px;
             padding-top: 25px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(183, 126, 255, 0.2);
         }
 
         .donate-title {
@@ -640,60 +590,32 @@
             font-weight: 600;
         }
 
-        .cryptobot-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(14, 165, 233, 0.15));
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            padding: 16px;
-            border-radius: 16px;
-            color: #38bdf8;
-            text-decoration: none;
-            margin-bottom: 15px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            font-weight: 500;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .cryptobot-btn:hover {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(14, 165, 233, 0.25));
-            transform: scale(1.03);
-            border-color: rgba(56, 189, 248, 0.5);
-        }
-
+        .cryptobot-btn,
         .wallet-box {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(14, 165, 233, 0.15));
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            padding: 16px;
-            border-radius: 16px;
+            gap: 12px;
+            background: rgba(15, 15, 35, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(183, 126, 255, 0.4);
+            padding: 14px;
+            border-radius: 20px;
             color: var(--accent-primary);
             text-decoration: none;
             margin-bottom: 15px;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s ease;
             font-weight: 500;
             cursor: pointer;
             font-size: 0.9rem;
-            position: relative;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
         }
 
+        .cryptobot-btn:hover,
         .wallet-box:hover {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(14, 165, 233, 0.25));
-            transform: scale(1.03);
-            border-color: rgba(56, 189, 248, 0.5);
-        }
-
-        .wallet-box .wallet-icon {
-            color: var(--accent-primary);
+            background: rgba(183, 126, 255, 0.15);
+            transform: scale(1.02);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 15px rgba(155, 77, 255, 0.3);
         }
 
         .wallet-container {
@@ -735,139 +657,15 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0.3; }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.02); }
-        }
-
-        @keyframes greetingAppear {
-            0% { opacity: 0; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-
-        @keyframes textSlideUp {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes snowFall {
-            0% { transform: translateY(-100px) rotate(0deg); }
-            100% { transform: translateY(100vh) rotate(360deg); }
-        }
-
-        @keyframes timerPulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        @media (max-width: 500px) {
-            .container {
-                padding: 15px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .avatar-container {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .info-section, .faq-section, .new-year-section,
-            .projects-section, .channels-section, .reputation-section {
-                padding: 16px;
-            }
-            
-            .timer-value {
-                font-size: 1.8rem;
-                min-width: 60px;
-            }
-            
-            .timer-unit {
-                min-width: 60px;
-            }
-            
-            .greeting-text {
-                font-size: 1.5rem;
-            }
-            
-            .wallet-box {
-                padding: 14px;
-            }
-            
-            .project-card, .channel-card, .reputation-card {
-                padding: 14px;
-            }
-            
-            .project-header, .channel-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-            
-            .project-name, .channel-name {
-                margin-right: 0;
-            }
-            
-            .project-role, .channel-role {
-                align-self: flex-start;
-            }
-        }
-
-        @media (max-width: 350px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .timer {
-                gap: 5px;
-            }
-            
-            .timer-value {
-                font-size: 1.5rem;
-                min-width: 50px;
-            }
-            
-            .timer-unit {
-                min-width: 50px;
-            }
-        }
-
         .scroll-indicator {
             position: fixed;
             bottom: 20px;
             right: 20px;
             width: 40px;
             height: 40px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(20, 20, 40, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(183, 126, 255, 0.5);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -877,8 +675,6 @@
             visibility: hidden;
             transition: all 0.3s ease;
             z-index: 100;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
         }
 
         .scroll-indicator.visible {
@@ -891,18 +687,79 @@
             color: white;
             transform: scale(1.1);
         }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+        }
+        @keyframes greetingAppear {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes textSlideUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes snowFall {
+            0% { transform: translateY(-100px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+        @keyframes timerPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @media (max-width: 500px) {
+            .container { padding: 15px; }
+            h1 { font-size: 2rem; }
+            .avatar-container { width: 120px; height: 120px; }
+            .faq-section, .info-section, .new-year-section,
+            .projects-section, .channels-section, .reputation-section { padding: 16px; }
+            .timer-value { font-size: 1.8rem; min-width: 60px; }
+            .timer-unit { min-width: 60px; }
+            .greeting-text { font-size: 1.5rem; }
+            .project-card, .channel-card, .reputation-card, .notice-card { padding: 14px; }
+            .project-header, .channel-header {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .project-role, .channel-role {
+                white-space: normal;
+            }
+        }
+        @media (max-width: 350px) {
+            h1 { font-size: 1.8rem; }
+            .timer { gap: 5px; }
+            .timer-value { font-size: 1.5rem; min-width: 50px; }
+            .timer-unit { min-width: 50px; }
+        }
     </style>
 </head>
 <body>
+    <canvas id="planet-canvas"></canvas>
     <div class="snow-container" id="snowContainer"></div>
-    
     <div id="overlay">
         <div class="greeting-container">
             <div class="greeting-text" id="greetingText"></div>
             <div class="greeting-hint">Нажмите для входа</div>
         </div>
     </div>
-
     <div class="container">
         <div class="header section">
             <div class="avatar-container">
@@ -911,15 +768,12 @@
                     Ваш браузер не поддерживает видео.
                 </video>
             </div>
-
             <h1>Type</h1>
             <a href="https://t.me/execuxc" target="_blank" class="username">@execuxc</a>
-
             <div class="typewriter-container">
                 <span id="typewriter"></span><span class="cursor"></span>
             </div>
         </div>
-
         <div class="faq-section section">
             <div class="faq-item">
                 <div class="faq-question"><i class="fas fa-handshake"></i> Сотрудничество</div>
@@ -928,7 +782,6 @@
                     Готов обсудить интересные предложения и идеи.
                 </div>
             </div>
-            
             <div class="faq-item">
                 <div class="faq-question"><i class="fas fa-clock"></i> Время ответа</div>
                 <div class="faq-answer">
@@ -937,7 +790,6 @@
                 </div>
             </div>
         </div>
-
         <div class="info-section section">
             <div class="info-category">
                 <div class="category-title"><i class="fas fa-code"></i> С чем работал</div>
@@ -949,7 +801,6 @@
                     <span class="tech-tag">Linux (Mint/Ubuntu)</span>
                 </div>
             </div>
-            
             <div class="info-category">
                 <div class="category-title"><i class="fa-brands fa-codepen"></i> Основные направления</div>
                 <div class="category-content">
@@ -958,42 +809,17 @@
                     <span class="tech-tag">Антискам движение Liars Base</span>
                 </div>
             </div>
-            
             <div class="info-category">
                 <div class="category-title"><i class="fa-solid fa-circle-info"></i> О себе</div>
                 <div class="category-content">
-                    Школьник, скрипт-кидди. Разработчик в сфере автоматизации, программирования.
+                    Школьник. Разработчик в сфере автоматизации, программирования.
                 </div>
             </div>
         </div>
-
         <div class="channels-section section">
             <h2 class="section-title"><i class="fa-brands fa-slack"></i> Каналы и проекты</h2>
-            
             <div class="channel-card">
-                <div class="project-header">
-                    <div class="channel-name">Type | Modules</div>
-                    <div class="channel-role">РАЗРАБОТКА</div>
-                </div>
-                <div class="channel-description">Канал с модулями для Heroku и Hikka. Актуальные обновления.</div>
-                <div class="channel-links">
-                    <a href="https://t.me/TypeModulesT" target="_blank" class="channel-link">АРХИВ</a>
-                </div>
-            </div>
-            
-            <div class="channel-card">
-                <div class="project-header">
-                    <div class="channel-name">Osint/Geoint | Type</div>
-                    <div class="channel-role">OSINT/GEOINT</div>
-                </div>
-                <div class="channel-description">Канал, посвящённый сфере OSINT/GEOINT, исследованиям и работам в области открытых данных.</div>
-                <div class="channel-links">
-                    <a href="https://t.me/+XmYKx_OiOVo0NTcx" target="_blank" class="channel-link">СНЕСЁН</a>
-                </div>
-            </div>
-            
-            <div class="channel-card">
-                <div class="project-header">
+                <div class="channel-header">
                     <div class="channel-name">Referral | Type</div>
                     <div class="channel-role">РЕФЕРАЛКИ</div>
                 </div>
@@ -1002,8 +828,11 @@
                     <a href="https://t.me/referaltype" target="_blank" class="channel-link">ПЕРЕЙТИ В КАНАЛ</a>
                 </div>
             </div>
+            <div class="notice-card">
+                <div class="notice-title"><i class="fas fa-info-circle"></i> Уведомление</div>
+                <div class="notice-description">Теперь не участвую в км Userbot's в роли разработчика</div>
+            </div>
         </div>
-
         <div class="reputation-section section">
             <h2 class="section-title"><i class="fa-solid fa-users"></i> Репутация</h2>
             <div class="reputation-card">
@@ -1014,47 +843,26 @@
                 <a href="https://t.me/ArtHash1" target="_blank" class="reputation-link">Перейти к отзывам</a>
             </div>
         </div>
-
         <div class="new-year-section section">
             <video class="new-year-video-bg" autoplay muted loop playsinline preload="metadata">
                 <source src="https://pomf2.lain.la/f/9bdraexz.mp4" type="video/mp4">
             </video>
-            
             <div class="new-year-content">
                 <div class="new-year-title">🎄 До Нового Года осталось:</div>
-                
                 <div class="timer">
-                    <div class="timer-unit">
-                        <div class="timer-value" id="days">00</div>
-                        <div class="timer-label">Дней</div>
-                    </div>
-                    <div class="timer-unit">
-                        <div class="timer-value" id="hours">00</div>
-                        <div class="timer-label">Часов</div>
-                    </div>
-                    <div class="timer-unit">
-                        <div class="timer-value" id="minutes">00</div>
-                        <div class="timer-label">Минут</div>
-                    </div>
-                    <div class="timer-unit">
-                        <div class="timer-value" id="seconds">00</div>
-                        <div class="timer-label">Секунд</div>
-                    </div>
+                    <div class="timer-unit"><div class="timer-value" id="days">00</div><div class="timer-label">Дней</div></div>
+                    <div class="timer-unit"><div class="timer-value" id="hours">00</div><div class="timer-label">Часов</div></div>
+                    <div class="timer-unit"><div class="timer-value" id="minutes">00</div><div class="timer-label">Минут</div></div>
+                    <div class="timer-unit"><div class="timer-value" id="seconds">00</div><div class="timer-label">Секунд</div></div>
                 </div>
-                
-                <div class="new-year-message">
-                    Новый год.. А пока можно успеть многое сделать!
-                </div>
+                <div class="new-year-message">Новый год.. А пока можно успеть многое сделать!</div>
             </div>
         </div>
-
         <div class="donate-section">
             <div class="donate-title">Поддержка / Донат</div>
-            
             <a href="http://t.me/send?start=IVzWY1xJrXCv" target="_blank" class="cryptobot-btn">
                 <i class="fas fa-robot"></i> Отправить через CryptoBot
             </a>
-
             <div class="wallet-container">
                 <div class="wallet-box" id="walletBox">
                     <span class="copy-tooltip">Скопировано!</span>
@@ -1064,10 +872,115 @@
             </div>
         </div>
     </div>
-
     <div class="scroll-indicator" id="scrollIndicator">
         <i class="fas fa-arrow-up"></i>
     </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.128.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        function initPlanet() {
+            const canvas = document.getElementById('planet-canvas');
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setClearColor(0x03030c, 0);
+            const scene = new THREE.Scene();
+            scene.background = null;
+            const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 0, 8);
+            camera.lookAt(0, 0, 0);
+            const ambientLight = new THREE.AmbientLight(0x404060);
+            scene.add(ambientLight);
+            const mainLight = new THREE.DirectionalLight(0xffffff, 1);
+            mainLight.position.set(5, 5, 5);
+            scene.add(mainLight);
+            const backLight = new THREE.PointLight(0x9b4dff, 0.5);
+            backLight.position.set(-2, 1, -3);
+            scene.add(backLight);
+            const fillLight = new THREE.PointLight(0xb77eff, 0.4);
+            fillLight.position.set(2, 1, 3);
+            scene.add(fillLight);
+            const canvasTexture = document.createElement('canvas');
+            canvasTexture.width = 1024;
+            canvasTexture.height = 1024;
+            const ctx = canvasTexture.getContext('2d');
+            ctx.fillStyle = '#7b2cbf';
+            ctx.fillRect(0, 0, canvasTexture.width, canvasTexture.height);
+            for (let i = 0; i < 800; i++) {
+                const radius = Math.random() * 30 + 5;
+                const x = Math.random() * canvasTexture.width;
+                const y = Math.random() * canvasTexture.height;
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(180, 130, 255, ${Math.random() * 0.4})`;
+                ctx.fill();
+            }
+            for (let i = 0; i < 400; i++) {
+                const radius = Math.random() * 20 + 3;
+                const x = Math.random() * canvasTexture.width;
+                const y = Math.random() * canvasTexture.height;
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(100, 50, 150, ${Math.random() * 0.6})`;
+                ctx.fill();
+            }
+            const texture = new THREE.CanvasTexture(canvasTexture);
+            const geometry = new THREE.SphereGeometry(2, 128, 128);
+            const material = new THREE.MeshStandardMaterial({
+                map: texture,
+                color: 0xaa77ff,
+                emissive: 0x2a0a4a,
+                emissiveIntensity: 0.3,
+                roughness: 0.6,
+                metalness: 0.2
+            });
+            const planet = new THREE.Mesh(geometry, material);
+            scene.add(planet);
+            const ringGeo = new THREE.TorusGeometry(2.6, 0.08, 64, 200);
+            const ringMat = new THREE.MeshStandardMaterial({ color: 0xb77eff, emissive: 0x5a2a8a, emissiveIntensity: 0.4 });
+            const ring = new THREE.Mesh(ringGeo, ringMat);
+            ring.rotation.x = Math.PI / 2.5;
+            ring.rotation.z = 0.3;
+            scene.add(ring);
+            const starsGeometry = new THREE.BufferGeometry();
+            const starsCount = 1500;
+            const starsPositions = new Float32Array(starsCount * 3);
+            for (let i = 0; i < starsCount; i++) {
+                starsPositions[i*3] = (Math.random() - 0.5) * 2000;
+                starsPositions[i*3+1] = (Math.random() - 0.5) * 1000;
+                starsPositions[i*3+2] = (Math.random() - 0.5) * 100 - 50;
+            }
+            starsGeometry.setAttribute('position', new THREE.BufferAttribute(starsPositions, 3));
+            const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.3, transparent: true, opacity: 0.6 });
+            const stars = new THREE.Points(starsGeometry, starsMaterial);
+            scene.add(stars);
+            function animate() {
+                requestAnimationFrame(animate);
+                planet.rotation.y += 0.002;
+                planet.rotation.x += 0.0005;
+                ring.rotation.y += 0.001;
+                ring.rotation.x += 0.0003;
+                stars.rotation.y += 0.0002;
+                renderer.render(scene, camera);
+            }
+            animate();
+            window.addEventListener('resize', onWindowResize, false);
+            function onWindowResize() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+        }
+        initPlanet();
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -1083,34 +996,17 @@
 
         function initSnow() {
             const container = document.getElementById('snowContainer');
-            const snowflakeCount = 50;
-            
+            const snowflakeCount = 40;
             for (let i = 0; i < snowflakeCount; i++) {
-                createSnowflake(container);
-            }
-            
-            function createSnowflake(container) {
                 const flake = document.createElement('div');
                 flake.className = 'snowflake';
-                
                 const size = Math.random() * 4 + 1;
-                const startX = Math.random() * 100;
-                const duration = Math.random() * 20 + 10;
-                const delay = Math.random() * 5;
-                
                 flake.style.width = `${size}px`;
                 flake.style.height = `${size}px`;
-                flake.style.left = `${startX}%`;
-                flake.style.opacity = Math.random() * 0.5 + 0.3;
-                flake.style.animation = `snowFall ${duration}s linear ${delay}s infinite`;
-                flake.style.willChange = 'transform';
-                
+                flake.style.left = `${Math.random() * 100}%`;
+                flake.style.opacity = Math.random() * 0.5 + 0.2;
+                flake.style.animation = `snowFall ${Math.random() * 20 + 10}s linear ${Math.random() * 5}s infinite`;
                 container.appendChild(flake);
-                
-                flake.addEventListener('animationiteration', () => {
-                    flake.style.left = `${Math.random() * 100}%`;
-                    flake.style.opacity = Math.random() * 0.5 + 0.3;
-                });
             }
         }
 
@@ -1118,118 +1014,69 @@
             const overlay = document.getElementById('overlay');
             const greetingText = document.getElementById('greetingText');
             const container = document.querySelector('.container');
-            
             const hour = new Date().getHours();
             let greeting = '';
-            
-            if (hour >= 5 && hour < 12) {
-                greeting = 'Утречка';
-            } else if (hour >= 12 && hour < 18) {
-                greeting = 'Добрый день';
-            } else if (hour >= 18 && hour < 23) {
-                greeting = 'Вечерняя смена';
-            } else {
-                greeting = 'Время прибытия';
-            }
-            
+            if (hour >= 5 && hour < 12) greeting = 'Утречка';
+            else if (hour >= 12 && hour < 18) greeting = 'Добрый день';
+            else if (hour >= 18 && hour < 23) greeting = 'Вечерняя смена';
+            else greeting = 'Время прибытия';
             greetingText.textContent = greeting;
-            
             overlay.addEventListener('click', () => {
                 overlay.classList.add('fade-out');
-                
                 setTimeout(() => {
                     overlay.style.display = 'none';
                     container.style.display = 'block';
-                    
-                    document.querySelectorAll('.section').forEach((section, index) => {
-                        setTimeout(() => {
-                            section.classList.add('visible');
-                        }, index * 100);
+                    document.querySelectorAll('.section').forEach((section, idx) => {
+                        setTimeout(() => section.classList.add('visible'), idx * 100);
                     });
                 }, 1000);
             });
-            
             document.addEventListener('keydown', (e) => {
-                if (e.code === 'Enter' || e.code === 'Space') {
-                    overlay.click();
-                }
+                if (e.code === 'Enter' || e.code === 'Space') overlay.click();
             });
         }
 
         function initTypewriter() {
-            const phrases = [
-                "AI-Driven Software Systems Engineer",
-                "type@root:~$ whoami",
-                "Разраб что ли",
-                "Тайпик",
-                "Еблан чутка"
-            ];
-            
+            const phrases = ["AI-Driven Software Systems Engineer", "type@root:~$ whoami", "Разраб что ли", "Тайпик", "Еблан чутка"];
             const typewriter = document.getElementById('typewriter');
-            let phraseIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            let isPaused = false;
-            
+            let phraseIndex = 0, charIndex = 0, isDeleting = false, isPaused = false;
             function type() {
-                const currentPhrase = phrases[phraseIndex];
-                
-                if (isPaused) {
-                    setTimeout(type, 1500);
-                    isPaused = false;
-                    return;
-                }
-                
-                if (!isDeleting && charIndex <= currentPhrase.length) {
-                    typewriter.textContent = currentPhrase.substring(0, charIndex);
+                const current = phrases[phraseIndex];
+                if (isPaused) { setTimeout(type, 1500); isPaused = false; return; }
+                if (!isDeleting && charIndex <= current.length) {
+                    typewriter.textContent = current.substring(0, charIndex);
                     charIndex++;
-                    setTimeout(type, charIndex === currentPhrase.length + 1 ? 1500 : 70 + Math.random() * 50);
+                    setTimeout(type, charIndex === current.length + 1 ? 1500 : 70 + Math.random() * 50);
                 } else if (isDeleting && charIndex >= 0) {
-                    typewriter.textContent = currentPhrase.substring(0, charIndex);
+                    typewriter.textContent = current.substring(0, charIndex);
                     charIndex--;
                     setTimeout(type, 30 + Math.random() * 30);
                 } else {
                     isDeleting = !isDeleting;
-                    if (!isDeleting) {
-                        phraseIndex = (phraseIndex + 1) % phrases.length;
-                    }
+                    if (!isDeleting) phraseIndex = (phraseIndex + 1) % phrases.length;
                     isPaused = true;
                     setTimeout(type, 500);
                 }
             }
-            
             setTimeout(type, 1000);
         }
 
         function initCopyWallet() {
             const walletBox = document.getElementById('walletBox');
             const walletFull = 'UQBix5YrlgWgBpfv2Q1uUav2GDv_b1JxoB9l9rwdRulJb2DN';
-            
             walletBox.addEventListener('click', function() {
                 navigator.clipboard.writeText(walletFull).then(() => {
                     this.classList.add('copied');
-                    
-                    this.style.transform = 'scale(1.05)';
-                    setTimeout(() => {
-                        this.style.transform = 'scale(1)';
-                        this.classList.remove('copied');
-                    }, 300);
-                    
-                }).catch(err => {
-                    console.error('Ошибка копирования: ', err);
+                    setTimeout(() => this.classList.remove('copied'), 300);
+                }).catch(() => {
                     const textArea = document.createElement('textarea');
                     textArea.value = walletFull;
                     document.body.appendChild(textArea);
                     textArea.select();
                     document.execCommand('copy');
                     document.body.removeChild(textArea);
-                    
                     this.classList.add('copied');
-                    this.style.transform = 'scale(1.05)';
-                    setTimeout(() => {
-                        this.style.transform = 'scale(1)';
-                        this.classList.remove('copied');
-                    }, 300);
+                    setTimeout(() => this.classList.remove('copied'), 300);
                 });
             });
         }
@@ -1239,84 +1086,44 @@
             const hoursEl = document.getElementById('hours');
             const minutesEl = document.getElementById('minutes');
             const secondsEl = document.getElementById('seconds');
-            
-            function updateTimer() {
+            function update() {
                 const now = new Date();
-                const currentYear = now.getFullYear();
-                const newYear = new Date(currentYear + 1, 0, 1, 0, 0, 0, 0);
+                const newYear = new Date(now.getFullYear() + 1, 0, 1);
                 const diff = newYear - now;
-                
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                
-                daysEl.textContent = String(days).padStart(2, '0');
-                hoursEl.textContent = String(hours).padStart(2, '0');
-                minutesEl.textContent = String(minutes).padStart(2, '0');
-                secondsEl.textContent = String(seconds).padStart(2, '0');
-                
-                if (seconds === 59) {
-                    secondsEl.style.animation = 'timerPulse 0.3s ease';
-                    setTimeout(() => {
-                        secondsEl.style.animation = '';
-                    }, 300);
-                }
+                const days = Math.floor(diff / (1000*60*60*24));
+                const hours = Math.floor((diff % (86400000)) / 3600000);
+                const minutes = Math.floor((diff % 3600000) / 60000);
+                const seconds = Math.floor((diff % 60000) / 1000);
+                daysEl.textContent = String(days).padStart(2,'0');
+                hoursEl.textContent = String(hours).padStart(2,'0');
+                minutesEl.textContent = String(minutes).padStart(2,'0');
+                secondsEl.textContent = String(seconds).padStart(2,'0');
             }
-            
-            updateTimer();
-            setInterval(updateTimer, 1000);
+            update();
+            setInterval(update, 1000);
         }
 
         function initVideoBackground() {
-            const video = document.querySelector('.new-year-video-bg');
-            if (video) {
-                video.playbackRate = 0.7;
-            }
-            
-            const avatarVideo = document.querySelector('.avatar');
-            if (avatarVideo) {
-                avatarVideo.playbackRate = 1.0;
-            }
+            const vid = document.querySelector('.new-year-video-bg');
+            if (vid) vid.playbackRate = 0.7;
+            const avatarVid = document.querySelector('.avatar');
+            if (avatarVid) avatarVid.playbackRate = 1.0;
         }
 
         function initScrollAnimations() {
-            const sections = document.querySelectorAll('.section');
-            
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
-            
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+                entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.section').forEach(s => observer.observe(s));
         }
 
         function initScrollIndicator() {
-            const scrollIndicator = document.getElementById('scrollIndicator');
-            
-            window.addEventListener('scroll', function() {
-                if (window.pageYOffset > 300) {
-                    scrollIndicator.classList.add('visible');
-                } else {
-                    scrollIndicator.classList.remove('visible');
-                }
+            const indicator = document.getElementById('scrollIndicator');
+            window.addEventListener('scroll', () => {
+                indicator.classList.toggle('visible', window.pageYOffset > 300);
             });
-            
-            scrollIndicator.addEventListener('click', function() {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
+            indicator.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         }
     </script>
 </body>
-                    </html>
+</html>
