@@ -14,7 +14,6 @@
       --accent: #b77eff;
       --text-primary: #ffffff;
       --text-secondary: #c0c0e0;
-      --danger: #ef4444;
     }
     body {
       font-family: 'Inter', sans-serif;
@@ -202,7 +201,6 @@
   import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp } from 'firebase/firestore';
   import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
-  // Конфиг Firebase
   const firebaseConfig = {
     apiKey: "AIzaSyAXUdd72BEUAZ3vveRH15Hx4tMiuGtcIuY",
     authDomain: "tphg-987cc.firebaseapp.com",
@@ -216,32 +214,88 @@
   const db = getFirestore(app);
   const storage = getStorage(app);
 
-  const path = window.location.pathname;
-  const slugMatch = path.match(/^\/tph-link\/([^\/]+)$/);
+  let originalPath = window.location.pathname;
+  if (originalPath.includes('/tph-link/index.html/')) {
+    const parts = originalPath.split('/tph-link/index.html/');
+    if (parts[1]) {
+      originalPath = '/tph-link/' + parts[1];
+      window.history.replaceState(null, '', originalPath);
+    }
+  }
+
+  const slugMatch = originalPath.match(/^\/tph-link\/([^\/]+)$/);
   const container = document.getElementById('app');
 
-  if (slugMatch) {
+  if (slugMatch && slugMatch[1] !== '' && slugMatch[1] !== 'index.html') {
     loadArticle(slugMatch[1]);
   } else {
     renderEditor();
   }
 
   async function loadArticle(slug) {
-    const q = query(collection(db, 'articles'), where('slug', '==', slug));
-    const snapshot = await getDocs(q);
-    if (snapshot.empty) {
+    container.innerHTML = '<div style="text-align:center"><i class="fas fa-spinner fa-pulse"></i> Загрузка...</div>';
+    try {
+      const q = query(collection(db, 'articles'), where('slug', '==', slug));
+      const snapshot = await getDocs(q);
+      if (snapshot.empty) {
+        container.innerHTML = `
+          <a href="/tph-link/" class="back-link"><i class="fas fa-arrow-left"></i> Создать новую</a>
+          <h1><i class="fas fa-exclamation-triangle"></i> Статья не найдена</h1>
+        `;
+        return;
+      }
+      const data = snapshot.docs[0].data();
       container.innerHTML = `
         <a href="/tph-link/" class="back-link"><i class="fas fa-arrow-left"></i> Создать новую</a>
-        <h1><i class="fas fa-exclamation-triangle"></i> Статья не найдена</h1>
+        <h1><i class="fas fa-newspaper"></i> ${escapeHtml(data.title)}</h1>
+        <div class="article-content">${data.content}</div>
       `;
-      return;
+    } catch (error) {
+      console.error(error);
+      container.innerHTML = `
+        <a href="/tph-link/" class="back-link"><i class="fas fa-arrow-left"></i> Создать новую</a>
+        <h1><i class="fas fa-exclamation-triangle"></i> Ошибка загрузки</h1>
+        <div class="status">Не удалось загрузить статью. Попробуйте позже.</div>
+      `;
     }
-    const data = snapshot.docs[0].data();
-    container.innerHTML = `
-      <a href="/tph-link/" class="back-link"><i class="fas fa-arrow-left"></i> Создать новую</a>
-      <h1><i class="fas fa-newspaper"></i> ${escapeHtml(data.title)}</h1>
-      <div class="article-content">${data.content}</div>
-    `;
+  }
+
+  function transliterate(text) {
+    const map = {
+      'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'e',
+      'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm',
+      'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u',
+      'ф': 'f', 'х': 'h', 'ц': 'ts', 'ч': 'ch', 'ш': 'sh', 'щ': 'sch', 'ъ': '',
+      'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya',
+      'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D', 'Е': 'E', 'Ё': 'E',
+      'Ж': 'Zh', 'З': 'Z', 'И': 'I', 'Й': 'Y', 'К': 'K', 'Л': 'L', 'М': 'M',
+      'Н': 'N', 'О': 'O', 'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U',
+      'Ф': 'F', 'Х': 'H', 'Ц': 'Ts', 'Ч': 'Ch', 'Ш': 'Sh', 'Щ': 'Sch', 'Ъ': '',
+      'Ы': 'Y', 'Ь': '', 'Э': 'E', 'Ю': 'Yu', 'Я': 'Ya'
+    };
+    return text.replace(/[^a-zA-Z0-9]/g, function(c) {
+      return map[c] || (c === ' ' ? '-' : '');
+    }).replace(/-+/g, '-').replace(/^-|-$/g, '').toLowerCase();
+  }
+
+  function slugify(text) {
+    let slug = transliterate(text).toLowerCase();
+    slug = slug.replace(/[^\w-]/g, '');
+    slug = slug.replace(/-+/g, '-');
+    slug = slug.replace(/^-|-$/g, '');
+    return slug.slice(0, 100);
+  }
+
+  async function getUniqueSlug(baseSlug) {
+    let slug = baseSlug;
+    let counter = 1;
+    while (true) {
+      const q = query(collection(db, 'articles'), where('slug', '==', slug));
+      const snapshot = await getDocs(q);
+      if (snapshot.empty) return slug;
+      counter++;
+      slug = `${baseSlug}-${String(counter).padStart(2, '0')}`;
+    }
   }
 
   function renderEditor() {
@@ -272,17 +326,9 @@
 
     let uploadedImageUrl = null;
 
-    function slugify(text) {
-      return text.toString().toLowerCase().trim()
-        .replace(/[^\w\s-а-яё]/g, '')
-        .replace(/\s+/g, '-')
-        .replace(/-+/g, '-')
-        .slice(0, 100);
-    }
-
     titleInput.addEventListener('input', () => {
-      const slug = slugify(titleInput.value);
-      slugPreview.textContent = slug ? `Ссылка: /tph-link/${slug}` : '';
+      const baseSlug = slugify(titleInput.value);
+      slugPreview.textContent = baseSlug ? `Ссылка: /tph-link/${baseSlug}` : '';
     });
 
     attachBtn.addEventListener('click', () => imageFileInput.click());
@@ -314,11 +360,14 @@
         statusDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Заполните заголовок и текст.';
         return;
       }
-      const slug = slugify(title);
-      if (!slug) {
+      const baseSlug = slugify(title);
+      if (!baseSlug) {
         statusDiv.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Некорректный заголовок.';
         return;
       }
+      statusDiv.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Проверка уникальности ссылки...';
+      const finalSlug = await getUniqueSlug(baseSlug);
+      slugPreview.textContent = `Ссылка: /tph-link/${finalSlug}`;
       if (uploadedImageUrl) {
         const imgHtml = `<div><img src="${uploadedImageUrl}" style="max-width:100%; border-radius:12px; margin:1rem 0;"></div>`;
         content = imgHtml + content;
@@ -326,16 +375,15 @@
       try {
         await addDoc(collection(db, 'articles'), {
           title,
-          slug,
+          slug: finalSlug,
           content,
           createdAt: serverTimestamp()
         });
-        statusDiv.innerHTML = `<i class="fas fa-check-circle"></i> Статья опубликована! <a href="/tph-link/${slug}" target="_blank">Перейти</a>`;
+        statusDiv.innerHTML = `<i class="fas fa-check-circle"></i> Статья опубликована! <a href="/tph-link/${finalSlug}" target="_blank">Перейти</a>`;
         titleInput.value = '';
         contentTextarea.value = '';
         imagePreview.style.display = 'none';
         uploadedImageUrl = null;
-        slugPreview.textContent = '';
         imageFileInput.value = '';
       } catch (error) {
         console.error(error);
@@ -353,7 +401,6 @@
     });
   }
 
-  // Звёздный фон
   function initStars() {
     const canvas = document.getElementById('stars-canvas');
     if (!canvas) return;
