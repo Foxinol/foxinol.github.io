@@ -691,7 +691,6 @@
             gap: 12px;
             background: rgba(15, 15, 35, 0.6);
             backdrop-filter: blur(12px);
-            /* prettier-ignore */
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(183, 126, 255, 0.4);
             padding: 14px;
@@ -785,148 +784,60 @@
 
         /* ── Keyframes ── */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         @keyframes blink {
-            0%,
-            50% {
-                opacity: 1;
-            }
-            51%,
-            100% {
-                opacity: 0.3;
-            }
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
         }
         @keyframes float {
-            0%,
-            100% {
-                transform: translateY(0) scale(1);
-            }
-            50% {
-                transform: translateY(-10px) scale(1.02);
-            }
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
         }
         @keyframes greetingAppear {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
         }
         @keyframes textSlideUp {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         @keyframes snowFall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-            }
+            0% { transform: translateY(-100px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
         }
         @keyframes pulse {
-            0%,
-            100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.7;
-            }
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
 
         /* ── Responsive ── */
         @media (max-width: 500px) {
-            .container {
-                padding: 15px;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-            .avatar-container {
-                width: 120px;
-                height: 120px;
-            }
-            .faq-section,
-            .info-section,
-            .new-year-section,
-            .projects-section,
-            .channels-section,
-            .reputation-section,
-            .session-notice {
-                padding: 16px;
-            }
-            .timer-value {
-                font-size: 1.8rem;
-                min-width: 60px;
-            }
-            .timer-unit {
-                min-width: 60px;
-            }
-            .greeting-text {
-                font-size: 1.5rem;
-            }
-            .project-card,
-            .channel-card,
-            .reputation-card,
-            .notice-card {
-                padding: 14px;
-            }
-            .project-header,
-            .channel-header {
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-            .project-role,
-            .channel-role {
-                white-space: normal;
-            }
-            .session-notice-title {
-                font-size: 0.9rem;
-            }
-            .session-notice-link {
-                font-size: 0.78rem;
-                padding: 3px 10px;
-            }
+            .container { padding: 15px; }
+            h1 { font-size: 2rem; }
+            .avatar-container { width: 120px; height: 120px; }
+            .faq-section, .info-section, .new-year-section,
+            .projects-section, .channels-section, .reputation-section,
+            .session-notice { padding: 16px; }
+            .timer-value { font-size: 1.8rem; min-width: 60px; }
+            .timer-unit { min-width: 60px; }
+            .greeting-text { font-size: 1.5rem; }
+            .project-card, .channel-card, .reputation-card, .notice-card { padding: 14px; }
+            .project-header, .channel-header { flex-wrap: wrap; gap: 8px; }
+            .project-role, .channel-role { white-space: normal; }
+            .session-notice-title { font-size: 0.9rem; }
+            .session-notice-link { font-size: 0.78rem; padding: 3px 10px; }
         }
         @media (max-width: 350px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            .timer {
-                gap: 5px;
-            }
-            .timer-value {
-                font-size: 1.5rem;
-                min-width: 50px;
-            }
-            .timer-unit {
-                min-width: 50px;
-            }
+            h1 { font-size: 1.8rem; }
+            .timer { gap: 5px; }
+            .timer-value { font-size: 1.5rem; min-width: 50px; }
+            .timer-unit { min-width: 50px; }
         }
     </style>
 </head>
@@ -959,13 +870,13 @@
             </div>
         </div>
 
-        <!-- ⚠ Session notice banner -->
+        <!-- ⚠ Session notice banner – UPDATED -->
         <div class="session-notice section">
             <span class="session-notice-icon"><i class="fas fa-triangle-exclamation"></i></span>
-            <div class="session-notice-title">Сессии основного аккаунта снесены и не факт что восстановлю</div>
+            <div class="session-notice-title">Сессии основного аккаунта снесены, не знаю, восстановлю ли.</div>
             <div class="session-notice-text">
-                По всем вопросам обращаться на аккаунт:
-                <a href="https://t.me/eurpc" target="_blank" class="session-notice-link">@eurpc</a>
+                @eurpc (2016 рег) заморожен, писать на 
+                <a href="https://t.me/IDEReport" target="_blank" class="session-notice-link">@IDEReport</a>
             </div>
         </div>
 
@@ -1004,7 +915,7 @@
                 <div class="category-content">
                     <span class="tech-tag">Разработка</span>
                     <span class="tech-tag">Веб-разработка</span>
-                    <span class="tech-tag">Антискам движение 1Ndex Base</span>
+                    <span class="tech-tag">Антискам движение Liars Base</span>
                 </div>
             </div>
             <div class="info-category">
@@ -1259,7 +1170,7 @@
         function initTypewriter() {
             const phrases = [
                 "AI-Driven Software Systems Engineer",
-                "type@root:~# whoami",
+                "type@root:~$ whoami",
                 "Разраб что ли",
                 "Тайпик",
                 "Еблан чутка",
