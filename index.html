@@ -336,7 +336,8 @@
         .projects-section,
         .channels-section,
         .reputation-section,
-        .new-year-section {
+        .new-year-section,
+        .scratch-section {
             background: rgba(10, 10, 25, 0.5);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -353,7 +354,8 @@
         .projects-section:hover,
         .channels-section:hover,
         .reputation-section:hover,
-        .new-year-section:hover {
+        .new-year-section:hover,
+        .scratch-section:hover {
             transform: translateY(-5px);
             border-color: rgba(183, 126, 255, 0.5);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(155, 77, 255, 0.3);
@@ -782,6 +784,24 @@
             transform: scale(1.1);
         }
 
+        /* ── Scratch iframe container ── */
+        .scratch-frame-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 485px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(155, 77, 255, 0.3);
+        }
+
+        .scratch-frame-wrapper iframe {
+            width: 100%;
+            height: 402px;
+            border: none;
+            display: block;
+        }
+
         /* ── Keyframes ── */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -823,7 +843,7 @@
             .avatar-container { width: 120px; height: 120px; }
             .faq-section, .info-section, .new-year-section,
             .projects-section, .channels-section, .reputation-section,
-            .session-notice { padding: 16px; }
+            .session-notice, .scratch-section { padding: 16px; }
             .timer-value { font-size: 1.8rem; min-width: 60px; }
             .timer-unit { min-width: 60px; }
             .greeting-text { font-size: 1.5rem; }
@@ -832,12 +852,14 @@
             .project-role, .channel-role { white-space: normal; }
             .session-notice-title { font-size: 0.9rem; }
             .session-notice-link { font-size: 0.78rem; padding: 3px 10px; }
+            .scratch-frame-wrapper iframe { height: 320px; }
         }
         @media (max-width: 350px) {
             h1 { font-size: 1.8rem; }
             .timer { gap: 5px; }
             .timer-value { font-size: 1.5rem; min-width: 50px; }
             .timer-unit { min-width: 50px; }
+            .scratch-frame-wrapper iframe { height: 280px; }
         }
     </style>
 </head>
@@ -939,6 +961,7 @@
                     <a href="https://t.me/referaltype" target="_blank" class="channel-link">ПЕРЕЙТИ В КАНАЛ</a>
                 </div>
             </div>
+        </div>
 
         <!-- Reputation -->
         <div class="reputation-section section">
@@ -949,6 +972,14 @@
                     Канал с отзывами о сотрудничестве и сделках.
                 </div>
                 <a href="https://t.me/ArtHash1" target="_blank" class="reputation-link">Перейти к отзывам</a>
+            </div>
+        </div>
+
+        <!-- Scratch Mini-Game (прикол) -->
+        <div class="scratch-section section">
+            <h2 class="section-title"><i class="fas fa-gamepad"></i> Выживи</h2>
+            <div class="scratch-frame-wrapper">
+                <iframe src="https://scratch.mit.edu/projects/1322119158/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
             </div>
         </div>
 
