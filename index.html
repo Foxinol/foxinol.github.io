@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Type | About me</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -12,7 +14,6 @@
             --bg-secondary: #0a0a20;
             --bg-glass: rgba(15, 15, 35, 0.45);
             --bg-glass-light: rgba(255, 255, 255, 0.08);
-            --bg-glass-medium: rgba(255, 255, 255, 0.12);
             --bg-card: rgba(20, 20, 40, 0.6);
             --text-primary: #ffffff;
             --text-secondary: #c0c0e0;
@@ -26,9 +27,7 @@
             --border-medium: rgba(255, 255, 255, 0.2);
             --shadow-glow: 0 0 30px rgba(155, 77, 255, 0.4);
             --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
-            --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.3);
             --gradient-accent: linear-gradient(135deg, #b77eff, #9b4dff, #7b2cbf);
-            --gradient-session: linear-gradient(135deg, #ff6b6b, #ef4444, #dc2626);
         }
 
         * {
@@ -37,11 +36,9 @@
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
-
         html {
             scroll-behavior: smooth;
         }
-
         body {
             background-color: #03030c;
             color: var(--text-primary);
@@ -86,7 +83,6 @@
             z-index: 1;
             overflow: hidden;
         }
-
         .snowflake {
             position: absolute;
             background: white;
@@ -94,6 +90,7 @@
             opacity: 0.5;
             filter: blur(0.5px);
             will-change: transform;
+            animation: snowFall linear infinite;
         }
 
         #overlay {
@@ -105,27 +102,23 @@
             background: rgba(3, 3, 12, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            z-index: 9999;
+            z-index: 10000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            opacity: 1;
-            visibility: visible;
             transition: opacity 1s ease, visibility 1s ease;
         }
-
         #overlay.fade-out {
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
         }
-
         .greeting-container {
             text-align: center;
             animation: greetingAppear 1.5s ease forwards;
         }
-
         .greeting-text {
             font-size: 2rem;
             margin-bottom: 20px;
@@ -138,7 +131,6 @@
             transform: translateY(30px);
             animation: textSlideUp 1s ease 0.5s forwards;
         }
-
         .greeting-hint {
             color: var(--text-secondary);
             font-size: 0.9rem;
@@ -152,7 +144,6 @@
             transform: translateY(30px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
-
         .section.visible {
             opacity: 1;
             transform: translateY(0);
@@ -162,14 +153,11 @@
             position: relative;
             margin-bottom: 30px;
         }
-
         .avatar-container {
-            position: relative;
             width: 140px;
             height: 140px;
             margin: 0 auto 25px;
         }
-
         .avatar {
             width: 100%;
             height: 100%;
@@ -177,13 +165,11 @@
             object-fit: cover;
             border: 3px solid rgba(183, 126, 255, 0.5);
             background: rgba(0, 0, 0, 0.3);
-            position: relative;
             transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: var(--shadow-glow);
             animation: float 6s ease-in-out infinite;
             will-change: transform;
         }
-
         .avatar:hover {
             transform: scale(1.05);
         }
@@ -198,7 +184,6 @@
             font-weight: 700;
             letter-spacing: -0.5px;
         }
-
         .username {
             color: var(--accent-primary);
             font-size: 1rem;
@@ -213,7 +198,6 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
         }
-
         .username:hover {
             background: rgba(183, 126, 255, 0.2);
             border-color: var(--accent-primary);
@@ -231,7 +215,6 @@
             justify-content: center;
             gap: 5px;
         }
-
         .cursor {
             display: inline-block;
             width: 3px;
@@ -241,7 +224,6 @@
             vertical-align: middle;
         }
 
-        /* ── Session Notice Banner ── */
         .session-notice {
             background: rgba(239, 68, 68, 0.1);
             backdrop-filter: blur(12px);
@@ -251,19 +233,15 @@
             padding: 18px 20px;
             margin-bottom: 25px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
             box-shadow: 0 0 28px rgba(239, 68, 68, 0.25), 0 8px 28px rgba(0, 0, 0, 0.35);
             animation: sessionGlow 2.5s ease-in-out infinite;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .session-notice:hover {
             border-color: rgba(239, 68, 68, 0.8);
             box-shadow: 0 0 40px rgba(239, 68, 68, 0.4), 0 12px 36px rgba(0, 0, 0, 0.45);
             transform: translateY(-3px);
         }
-
         .session-notice-icon {
             font-size: 1.8rem;
             margin-bottom: 6px;
@@ -271,7 +249,6 @@
             color: #ef4444;
             animation: pulseWarning 1.5s ease-in-out infinite;
         }
-
         .session-notice-title {
             font-size: 1rem;
             font-weight: 700;
@@ -279,13 +256,11 @@
             margin-bottom: 6px;
             letter-spacing: 0.3px;
         }
-
         .session-notice-text {
             color: #fecaca;
             font-size: 0.85rem;
             line-height: 1.5;
         }
-
         .session-notice-link {
             display: inline-block;
             color: #fff;
@@ -301,43 +276,13 @@
             transition: all 0.3s ease;
             white-space: nowrap;
         }
-
         .session-notice-link:hover {
             background: #ef4444;
             border-color: #ef4444;
             box-shadow: 0 0 16px rgba(239, 68, 68, 0.5);
         }
 
-        @keyframes sessionGlow {
-            0%,
-            100% {
-                box-shadow: 0 0 28px rgba(239, 68, 68, 0.25), 0 8px 28px rgba(0, 0, 0, 0.35);
-            }
-            50% {
-                box-shadow: 0 0 44px rgba(239, 68, 68, 0.45), 0 8px 32px rgba(0, 0, 0, 0.4);
-            }
-        }
-
-        @keyframes pulseWarning {
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.25);
-                opacity: 0.7;
-            }
-        }
-
-        /* ── Common card sections ── */
-        .faq-section,
-        .info-section,
-        .projects-section,
-        .channels-section,
-        .reputation-section,
-        .new-year-section,
-        .scratch-section {
+        .card-section {
             background: rgba(10, 10, 25, 0.5);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -348,69 +293,26 @@
             box-shadow: var(--shadow-card);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        .faq-section:hover,
-        .info-section:hover,
-        .projects-section:hover,
-        .channels-section:hover,
-        .reputation-section:hover,
-        .new-year-section:hover,
-        .scratch-section:hover {
+        .card-section:hover {
             transform: translateY(-5px);
             border-color: rgba(183, 126, 255, 0.5);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(155, 77, 255, 0.3);
         }
 
-        .faq-item {
+        .faq-item,
+        .info-category {
             text-align: left;
             margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .faq-item:last-child {
+        .faq-item:last-child,
+        .info-category:last-child {
             margin-bottom: 0;
             padding-bottom: 0;
             border-bottom: none;
         }
-
-        .faq-question {
-            color: var(--accent-primary);
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .faq-answer {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-
-        .response-time {
-            display: inline-block;
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--success);
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            margin: 2px;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            animation: pulse 2s infinite;
-        }
-
-        .info-category {
-            text-align: left;
-            margin-bottom: 15px;
-        }
-
-        .info-category:last-child {
-            margin-bottom: 0;
-        }
-
+        .faq-question,
         .category-title {
             color: var(--accent-primary);
             font-size: 0.9rem;
@@ -420,13 +322,22 @@
             align-items: center;
             gap: 8px;
         }
-
+        .faq-answer,
         .category-content {
             color: var(--text-secondary);
             font-size: 0.85rem;
             line-height: 1.5;
         }
-
+        .response-time {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            margin: 2px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
         .tech-tag {
             display: inline-block;
             background: rgba(183, 126, 255, 0.15);
@@ -460,9 +371,7 @@
             padding: 18px;
             margin-bottom: 15px;
             transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
         }
-
         .project-card:hover,
         .channel-card:hover,
         .reputation-card:hover,
@@ -471,7 +380,6 @@
             transform: translateY(-2px);
             background: rgba(0, 0, 0, 0.4);
         }
-
         .project-header,
         .channel-header {
             display: flex;
@@ -480,7 +388,6 @@
             margin-bottom: 10px;
             gap: 12px;
         }
-
         .project-name,
         .channel-name {
             font-weight: 700;
@@ -488,7 +395,6 @@
             color: var(--text-primary);
             word-break: break-word;
         }
-
         .project-role,
         .channel-role {
             font-size: 0.75rem;
@@ -500,7 +406,6 @@
             white-space: nowrap;
             flex-shrink: 0;
         }
-
         .project-description,
         .channel-description {
             color: var(--text-secondary);
@@ -510,14 +415,12 @@
             word-break: break-word;
             text-align: left;
         }
-
         .project-links,
         .channel-links {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
-
         .project-link,
         .channel-link {
             color: var(--accent-primary);
@@ -530,9 +433,7 @@
             font-weight: 500;
             display: inline-block;
             background: rgba(183, 126, 255, 0.05);
-            backdrop-filter: blur(4px);
         }
-
         .project-link:hover,
         .channel-link:hover {
             background: var(--accent-primary);
@@ -540,44 +441,22 @@
             box-shadow: 0 0 10px var(--accent-primary);
         }
 
-        .notice-card {
-            text-align: center;
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-        }
-
-        .notice-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--warning);
-            margin-bottom: 8px;
-        }
-
-        .notice-description {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            line-height: 1.4;
-        }
-
         .reputation-card {
             text-align: center;
             background: rgba(16, 185, 129, 0.08);
             border: 1px solid rgba(16, 185, 129, 0.3);
         }
-
         .reputation-title {
             font-size: 1.1rem;
             font-weight: 700;
             color: var(--success);
             margin-bottom: 8px;
         }
-
         .reputation-description {
             color: var(--text-secondary);
             font-size: 0.9rem;
             margin-bottom: 15px;
         }
-
         .reputation-link {
             display: inline-block;
             background: var(--success);
@@ -590,7 +469,6 @@
             font-weight: 500;
             border: 1px solid var(--success);
         }
-
         .reputation-link:hover {
             background: rgba(16, 185, 129, 0.9);
             transform: translateY(-2px);
@@ -601,7 +479,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .new-year-video-bg {
             position: absolute;
             top: 0;
@@ -613,12 +490,10 @@
             z-index: 0;
             border-radius: 24px;
         }
-
         .new-year-content {
             position: relative;
             z-index: 1;
         }
-
         .new-year-title {
             font-size: 1.3rem;
             margin-bottom: 20px;
@@ -626,7 +501,6 @@
             font-family: 'JetBrains Mono', monospace;
             color: var(--accent-primary);
         }
-
         .timer {
             display: flex;
             justify-content: center;
@@ -634,14 +508,12 @@
             margin-bottom: 15px;
             flex-wrap: wrap;
         }
-
         .timer-unit {
             display: flex;
             flex-direction: column;
             align-items: center;
             min-width: 70px;
         }
-
         .timer-value {
             font-size: 2.2rem;
             font-weight: 700;
@@ -654,7 +526,6 @@
             color: var(--accent-primary);
             backdrop-filter: blur(5px);
         }
-
         .timer-label {
             font-size: 0.8rem;
             color: var(--text-secondary);
@@ -662,7 +533,6 @@
             margin-top: 8px;
             letter-spacing: 1px;
         }
-
         .new-year-message {
             color: var(--text-secondary);
             font-size: 0.9rem;
@@ -670,12 +540,27 @@
             line-height: 1.5;
         }
 
+        .scratch-frame-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 485px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(155, 77, 255, 0.3);
+        }
+        .scratch-frame-wrapper iframe {
+            width: 100%;
+            height: 402px;
+            border: none;
+            display: block;
+        }
+
         .donate-section {
             margin-top: 40px;
             padding-top: 25px;
             border-top: 1px solid rgba(183, 126, 255, 0.2);
         }
-
         .donate-title {
             font-size: 0.9rem;
             color: var(--text-secondary);
@@ -684,7 +569,6 @@
             letter-spacing: 2px;
             font-weight: 600;
         }
-
         .cryptobot-btn,
         .wallet-box {
             display: flex;
@@ -705,7 +589,6 @@
             cursor: pointer;
             font-size: 0.9rem;
         }
-
         .cryptobot-btn:hover,
         .wallet-box:hover {
             background: rgba(183, 126, 255, 0.15);
@@ -713,11 +596,9 @@
             border-color: var(--accent-primary);
             box-shadow: 0 0 15px rgba(155, 77, 255, 0.3);
         }
-
         .wallet-container {
             position: relative;
         }
-
         .copy-tooltip {
             position: absolute;
             top: -35px;
@@ -735,7 +616,6 @@
             z-index: 100;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-
         .copy-tooltip::after {
             content: '';
             position: absolute;
@@ -746,7 +626,6 @@
             border-right: 5px solid transparent;
             border-top: 5px solid var(--accent-primary);
         }
-
         .wallet-box.copied .copy-tooltip {
             opacity: 1;
             visibility: visible;
@@ -772,37 +651,72 @@
             transition: all 0.3s ease;
             z-index: 100;
         }
-
         .scroll-indicator.visible {
             opacity: 1;
             visibility: visible;
         }
-
         .scroll-indicator:hover {
             background: var(--accent-primary);
             color: white;
             transform: scale(1.1);
         }
 
-        /* ── Scratch iframe container ── */
-        .scratch-frame-wrapper {
-            position: relative;
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            max-width: 485px;
-            margin: 0 auto;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 0 25px rgba(155, 77, 255, 0.3);
+            background: rgba(10, 10, 30, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(183, 126, 255, 0.35);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 20px;
+            gap: 20px;
+            flex-wrap: wrap;
+            box-sizing: border-box;
         }
-
-        .scratch-frame-wrapper iframe {
-            width: 100%;
-            height: 402px;
+        .cookie-text {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            flex: 1 1 250px;
+            text-align: left;
+        }
+        .cookie-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .cookie-btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
             border: none;
-            display: block;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--accent-primary);
+            color: white;
+            border: 1px solid var(--accent-primary);
+        }
+        .cookie-btn:hover {
+            background: var(--accent-secondary);
+            box-shadow: 0 0 15px rgba(155, 77, 255, 0.4);
+        }
+        .cookie-btn.secondary {
+            background: transparent;
+            border: 1px solid var(--border-medium);
+            color: var(--text-secondary);
+        }
+        .cookie-btn.secondary:hover {
+            border-color: var(--accent-primary);
+            color: white;
         }
 
-        /* ── Keyframes ── */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -831,28 +745,31 @@
             0% { transform: translateY(-100px) rotate(0deg); }
             100% { transform: translateY(100vh) rotate(360deg); }
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        @keyframes sessionGlow {
+            0%, 100% { box-shadow: 0 0 28px rgba(239, 68, 68, 0.25), 0 8px 28px rgba(0, 0, 0, 0.35); }
+            50% { box-shadow: 0 0 44px rgba(239, 68, 68, 0.45), 0 8px 32px rgba(0, 0, 0, 0.4); }
+        }
+        @keyframes pulseWarning {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.25); opacity: 0.7; }
         }
 
-        /* ── Responsive ── */
         @media (max-width: 500px) {
             .container { padding: 15px; }
             h1 { font-size: 2rem; }
             .avatar-container { width: 120px; height: 120px; }
-            .faq-section, .info-section, .new-year-section,
-            .projects-section, .channels-section, .reputation-section,
-            .session-notice, .scratch-section { padding: 16px; }
+            .card-section { padding: 16px; }
             .timer-value { font-size: 1.8rem; min-width: 60px; }
             .timer-unit { min-width: 60px; }
             .greeting-text { font-size: 1.5rem; }
-            .project-card, .channel-card, .reputation-card, .notice-card { padding: 14px; }
+            .project-card, .channel-card, .reputation-card { padding: 14px; }
             .project-header, .channel-header { flex-wrap: wrap; gap: 8px; }
             .project-role, .channel-role { white-space: normal; }
             .session-notice-title { font-size: 0.9rem; }
             .session-notice-link { font-size: 0.78rem; padding: 3px 10px; }
             .scratch-frame-wrapper iframe { height: 320px; }
+            .cookie-banner { flex-direction: column; text-align: center; gap: 15px; }
+            .cookie-text { text-align: center; }
         }
         @media (max-width: 350px) {
             h1 { font-size: 1.8rem; }
@@ -867,7 +784,6 @@
     <canvas id="planet-canvas"></canvas>
     <div class="snow-container" id="snowContainer"></div>
 
-    <!-- Greeting overlay -->
     <div id="overlay">
         <div class="greeting-container">
             <div class="greeting-text" id="greetingText"></div>
@@ -875,14 +791,11 @@
         </div>
     </div>
 
-    <!-- Main content -->
     <div class="container">
-        <!-- Header -->
         <div class="header section">
             <div class="avatar-container">
                 <video class="avatar" autoplay muted loop playsinline preload="auto">
                     <source src="https://kappa.lol/yo6IXT" type="video/mp4">
-                    Ваш браузер не поддерживает видео.
                 </video>
             </div>
             <h1>Type</h1>
@@ -892,7 +805,6 @@
             </div>
         </div>
 
-        <!-- ⚠ Session notice banner – UPDATED -->
         <div class="session-notice section">
             <span class="session-notice-icon"><i class="fas fa-triangle-exclamation"></i></span>
             <div class="session-notice-title">Сессии основного аккаунта снесены, не знаю, восстановлю ли.</div>
@@ -902,26 +814,18 @@
             </div>
         </div>
 
-        <!-- FAQ -->
-        <div class="faq-section section">
+        <div class="card-section section">
             <div class="faq-item">
                 <div class="faq-question"><i class="fas fa-handshake"></i> Сотрудничество</div>
-                <div class="faq-answer">
-                    Открыт для совместной разработки проектов, оформлению, волонтерству.
-                    Готов обсудить интересные предложения и идеи.
-                </div>
+                <div class="faq-answer">Открыт для совместной разработки проектов, оформлению, волонтерству. Готов обсудить интересные предложения и идеи.</div>
             </div>
             <div class="faq-item">
                 <div class="faq-question"><i class="fas fa-clock"></i> Время ответа</div>
-                <div class="faq-answer">
-                    Среднее время ответа: <span class="response-time">1-3 часа</span><br>
-                    Стараюсь отвечать максимально оперативно, но иногда могу быть занят.
-                </div>
+                <div class="faq-answer">Среднее время ответа: <span class="response-time">1-3 часа</span><br>Стараюсь отвечать максимально оперативно, но иногда могу быть занят.</div>
             </div>
         </div>
 
-        <!-- Info -->
-        <div class="info-section section">
+        <div class="card-section section">
             <div class="info-category">
                 <div class="category-title"><i class="fas fa-code"></i> С чем работал</div>
                 <div class="category-content">
@@ -929,7 +833,7 @@
                     <span class="tech-tag">Python</span>
                     <span class="tech-tag">JavaScript</span>
                     <span class="tech-tag">Bash</span>
-                    <span class="tech-tag">Linux (Mint/Ubuntu)</span>
+                    <span class="tech-tag">Linux</span>
                 </div>
             </div>
             <div class="info-category">
@@ -937,19 +841,16 @@
                 <div class="category-content">
                     <span class="tech-tag">Разработка</span>
                     <span class="tech-tag">Веб-разработка</span>
-                    <span class="tech-tag">Антискам движение Liars Base</span>
+                    <span class="tech-tag">Антискам Liars Base</span>
                 </div>
             </div>
             <div class="info-category">
                 <div class="category-title"><i class="fa-solid fa-circle-info"></i> О себе</div>
-                <div class="category-content">
-                    Школьник. Разработчик в сфере автоматизации, программирования.
-                </div>
+                <div class="category-content">Школьник. Разработчик в сфере автоматизации, программирования.</div>
             </div>
         </div>
 
-        <!-- Channels & projects -->
-        <div class="channels-section section">
+        <div class="card-section section">
             <h2 class="section-title"><i class="fa-brands fa-slack"></i> Каналы и проекты</h2>
             <div class="channel-card">
                 <div class="channel-header">
@@ -963,28 +864,23 @@
             </div>
         </div>
 
-        <!-- Reputation -->
-        <div class="reputation-section section">
+        <div class="card-section section">
             <h2 class="section-title"><i class="fa-solid fa-users"></i> Репутация</h2>
             <div class="reputation-card">
                 <div class="reputation-title">Отзывы о сотрудничестве</div>
-                <div class="reputation-description">
-                    Канал с отзывами о сотрудничестве и сделках.
-                </div>
+                <div class="reputation-description">Канал с отзывами о сотрудничестве и сделках.</div>
                 <a href="https://t.me/ArtHash1" target="_blank" class="reputation-link">Перейти к отзывам</a>
             </div>
         </div>
 
-        <!-- Scratch Mini-Game (прикол) -->
-        <div class="scratch-section section">
+        <div class="card-section section">
             <h2 class="section-title"><i class="fas fa-gamepad"></i> Выживи</h2>
             <div class="scratch-frame-wrapper">
-                <iframe src="https://scratch.mit.edu/projects/1322119158/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                <iframe src="https://scratch.mit.edu/projects/1322119158/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen loading="lazy"></iframe>
             </div>
         </div>
 
-        <!-- New Year timer -->
-        <div class="new-year-section section">
+        <div class="new-year-section card-section section">
             <video class="new-year-video-bg" autoplay muted loop playsinline preload="metadata">
                 <source src="https://pomf2.lain.la/f/9bdraexz.mp4" type="video/mp4">
             </video>
@@ -1000,7 +896,6 @@
             </div>
         </div>
 
-        <!-- Donate -->
         <div class="donate-section">
             <div class="donate-title">Поддержка / Донат</div>
             <a href="http://t.me/send?start=IVzWY1xJrXCv" target="_blank" class="cryptobot-btn">
@@ -1016,12 +911,20 @@
         </div>
     </div>
 
-    <!-- Scroll-to-top -->
     <div class="scroll-indicator" id="scrollIndicator">
         <i class="fas fa-arrow-up"></i>
     </div>
 
-    <!-- Three.js import map -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-text">
+            🍪 Мы используем cookie для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с обработкой данных.
+        </div>
+        <div class="cookie-buttons">
+            <button class="cookie-btn" id="acceptCookies">Принять</button>
+            <button class="cookie-btn secondary" id="declineCookies">Отклонить</button>
+        </div>
+    </div>
+
     <script type="importmap">
         { "imports": { "three": "https://unpkg.com/three@0.128.0/build/three.module.js" } }
     </script>
@@ -1031,20 +934,16 @@
 
         function initPlanet() {
             const canvas = document.getElementById('planet-canvas');
-            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
+            const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
             renderer.setClearColor(0x03030c, 0);
 
             const scene = new THREE.Scene();
-            scene.background = null;
-
             const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
             camera.position.set(0, 0, 8);
-            camera.lookAt(0, 0, 0);
 
-            const ambientLight = new THREE.AmbientLight(0x404060);
-            scene.add(ambientLight);
+            scene.add(new THREE.AmbientLight(0x404060));
             const mainLight = new THREE.DirectionalLight(0xffffff, 1);
             mainLight.position.set(5, 5, 5);
             scene.add(mainLight);
@@ -1055,22 +954,21 @@
             fillLight.position.set(2, 1, 3);
             scene.add(fillLight);
 
-            // Procedural planet texture
             const texCanvas = document.createElement('canvas');
-            texCanvas.width = 1024;
-            texCanvas.height = 1024;
+            texCanvas.width = 512;
+            texCanvas.height = 512;
             const ctx = texCanvas.getContext('2d');
             ctx.fillStyle = '#7b2cbf';
             ctx.fillRect(0, 0, texCanvas.width, texCanvas.height);
-            for (let i = 0; i < 800; i++) {
-                const r = Math.random() * 30 + 5;
+            for (let i = 0; i < 400; i++) {
+                const r = Math.random() * 20 + 5;
                 ctx.beginPath();
                 ctx.arc(Math.random() * texCanvas.width, Math.random() * texCanvas.height, r, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(180,130,255,${Math.random() * 0.4})`;
                 ctx.fill();
             }
-            for (let i = 0; i < 400; i++) {
-                const r = Math.random() * 20 + 3;
+            for (let i = 0; i < 200; i++) {
+                const r = Math.random() * 15 + 3;
                 ctx.beginPath();
                 ctx.arc(Math.random() * texCanvas.width, Math.random() * texCanvas.height, r, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(100,50,150,${Math.random() * 0.6})`;
@@ -1078,32 +976,22 @@
             }
             const texture = new THREE.CanvasTexture(texCanvas);
 
-            const geometry = new THREE.SphereGeometry(2, 128, 128);
-            const material = new THREE.MeshStandardMaterial({
-                map: texture,
-                color: 0xaa77ff,
-                emissive: 0x2a0a4a,
-                emissiveIntensity: 0.3,
-                roughness: 0.6,
-                metalness: 0.2,
-            });
-            const planet = new THREE.Mesh(geometry, material);
+            const planet = new THREE.Mesh(
+                new THREE.SphereGeometry(2, 64, 64),
+                new THREE.MeshStandardMaterial({ map: texture, color: 0xaa77ff, emissive: 0x2a0a4a, emissiveIntensity: 0.3, roughness: 0.6, metalness: 0.2 })
+            );
             scene.add(planet);
 
-            const ringGeo = new THREE.TorusGeometry(2.6, 0.08, 64, 200);
-            const ringMat = new THREE.MeshStandardMaterial({
-                color: 0xb77eff,
-                emissive: 0x5a2a8a,
-                emissiveIntensity: 0.4,
-            });
-            const ring = new THREE.Mesh(ringGeo, ringMat);
+            const ring = new THREE.Mesh(
+                new THREE.TorusGeometry(2.6, 0.08, 32, 120),
+                new THREE.MeshStandardMaterial({ color: 0xb77eff, emissive: 0x5a2a8a, emissiveIntensity: 0.4 })
+            );
             ring.rotation.x = Math.PI / 2.5;
             ring.rotation.z = 0.3;
             scene.add(ring);
 
-            // Stars
             const starsGeo = new THREE.BufferGeometry();
-            const starsCount = 1500;
+            const starsCount = 600;
             const positions = new Float32Array(starsCount * 3);
             for (let i = 0; i < starsCount; i++) {
                 positions[i * 3] = (Math.random() - 0.5) * 2000;
@@ -1111,21 +999,13 @@
                 positions[i * 3 + 2] = (Math.random() - 0.5) * 100 - 50;
             }
             starsGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            const starsMat = new THREE.PointsMaterial({
-                color: 0xffffff,
-                size: 0.3,
-                transparent: true,
-                opacity: 0.6,
-            });
-            const stars = new THREE.Points(starsGeo, starsMat);
+            const stars = new THREE.Points(starsGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.4, transparent: true, opacity: 0.5 }));
             scene.add(stars);
 
             function animate() {
                 requestAnimationFrame(animate);
                 planet.rotation.y += 0.002;
-                planet.rotation.x += 0.0005;
                 ring.rotation.y += 0.001;
-                ring.rotation.x += 0.0003;
                 stars.rotation.y += 0.0002;
                 renderer.render(scene, camera);
             }
@@ -1141,168 +1021,167 @@
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            initSnow();
-            initGreeting();
-            initTypewriter();
-            initCopyWallet();
-            initScrollIndicator();
-            initNewYearTimer();
-            initScrollAnimations();
-            initVideoBackground();
-        });
+        (function() {
+            const $ = (s) => document.querySelector(s);
+            const $$ = (s) => document.querySelectorAll(s);
 
-        function initSnow() {
-            const container = document.getElementById('snowContainer');
-            const count = 40;
-            const frag = document.createDocumentFragment();
-            for (let i = 0; i < count; i++) {
-                const flake = document.createElement('div');
-                flake.className = 'snowflake';
-                const size = Math.random() * 4 + 1;
-                flake.style.width = `${size}px`;
-                flake.style.height = `${size}px`;
-                flake.style.left = `${Math.random() * 100}%`;
-                flake.style.opacity = Math.random() * 0.5 + 0.2;
-                flake.style.animation = `snowFall ${Math.random() * 20 + 10}s linear ${Math.random() * 5}s infinite`;
-                frag.appendChild(flake);
-            }
-            container.appendChild(frag);
-        }
-
-        function initGreeting() {
-            const overlay = document.getElementById('overlay');
-            const greetingText = document.getElementById('greetingText');
-            const container = document.querySelector('.container');
-            const hour = new Date().getHours();
-            let greeting;
-            if (hour >= 5 && hour < 12) greeting = 'Утречка';
-            else if (hour >= 12 && hour < 18) greeting = 'Добрый день';
-            else if (hour >= 18 && hour < 23) greeting = 'Вечерняя смена';
-            else greeting = 'Время прибытия';
-            greetingText.textContent = greeting;
-
-            const dismissOverlay = () => {
-                overlay.classList.add('fade-out');
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                    document.querySelectorAll('.section').forEach((el, i) => {
-                        setTimeout(() => el.classList.add('visible'), i * 80);
-                    });
-                }, 1000);
-            };
-
-            overlay.addEventListener('click', dismissOverlay);
-            document.addEventListener('keydown', (e) => {
-                if (e.code === 'Enter' || e.code === 'Space') dismissOverlay();
-            });
-        }
-
-        function initTypewriter() {
-            const phrases = [
-                "AI-Driven Software Systems Engineer",
-                "type@root:~$ whoami",
-                "Разраб что ли",
-                "Тайпик",
-                "Еблан чутка",
-            ];
-            const el = document.getElementById('typewriter');
-            let phraseIdx = 0,
-                charIdx = 0,
-                deleting = false,
-                paused = false;
-
-            function type() {
-                const current = phrases[phraseIdx];
-                if (paused) { paused = false;
-                    setTimeout(type, 1500); return; }
-                if (!deleting && charIdx <= current.length) {
-                    el.textContent = current.substring(0, charIdx);
-                    charIdx++;
-                    const delay = charIdx === current.length + 1 ? 1500 : 70 + Math.random() * 50;
-                    setTimeout(type, delay);
-                } else if (deleting && charIdx >= 0) {
-                    el.textContent = current.substring(0, charIdx);
-                    charIdx--;
-                    setTimeout(type, 30 + Math.random() * 30);
-                } else {
-                    deleting = !deleting;
-                    if (!deleting) phraseIdx = (phraseIdx + 1) % phrases.length;
-                    paused = true;
-                    setTimeout(type, 500);
+            function initSnow() {
+                const container = document.getElementById('snowContainer');
+                const count = 25;
+                const frag = document.createDocumentFragment();
+                for (let i = 0; i < count; i++) {
+                    const flake = document.createElement('div');
+                    flake.className = 'snowflake';
+                    const size = Math.random() * 4 + 1;
+                    flake.style.width = `${size}px`;
+                    flake.style.height = `${size}px`;
+                    flake.style.left = `${Math.random() * 100}%`;
+                    flake.style.opacity = Math.random() * 0.5 + 0.2;
+                    flake.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                    flake.style.animationDelay = `${Math.random() * 5}s`;
+                    frag.appendChild(flake);
                 }
+                container.appendChild(frag);
             }
-            setTimeout(type, 1000);
-        }
 
-        function initCopyWallet() {
-            const box = document.getElementById('walletBox');
-            const full = 'UQBix5YrlgWgBpfv2Q1uUav2GDv_b1JxoB9l9rwdRulJb2DN';
-            box.addEventListener('click', () => {
-                const done = () => {
-                    box.classList.add('copied');
-                    setTimeout(() => box.classList.remove('copied'), 300);
+            function initGreeting() {
+                const overlay = $('#overlay');
+                const greetingText = $('#greetingText');
+                const hour = new Date().getHours();
+                const greeting = hour >= 5 && hour < 12 ? 'Утречка' : hour >= 12 && hour < 18 ? 'Добрый день' : hour >= 18 && hour < 23 ? 'Вечерняя смена' : 'Время прибытия';
+                greetingText.textContent = greeting;
+
+                const dismiss = () => {
+                    overlay.classList.add('fade-out');
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                        $$('.section').forEach((el, i) => setTimeout(() => el.classList.add('visible'), i * 80));
+                        showCookieBannerIfNeeded();
+                    }, 1000);
                 };
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(full).then(done).catch(() => fallbackCopy(full, done));
-                } else {
-                    fallbackCopy(full, done);
+                overlay.addEventListener('click', dismiss);
+                document.addEventListener('keydown', (e) => { if (e.code === 'Enter' || e.code === 'Space') dismiss(); });
+            }
+
+            function initTypewriter() {
+                const phrases = ["AI-Driven Software Systems Engineer", "type@root:~$ whoami", "Разраб что ли", "Тайпик", "Еблан чутка"];
+                const el = $('#typewriter');
+                let phraseIdx = 0, charIdx = 0, deleting = false, paused = false;
+
+                function type() {
+                    const current = phrases[phraseIdx];
+                    if (paused) { paused = false; setTimeout(type, 1500); return; }
+                    if (!deleting && charIdx <= current.length) {
+                        el.textContent = current.substring(0, charIdx);
+                        charIdx++;
+                        setTimeout(type, charIdx === current.length + 1 ? 1500 : 70 + Math.random() * 50);
+                    } else if (deleting && charIdx >= 0) {
+                        el.textContent = current.substring(0, charIdx);
+                        charIdx--;
+                        setTimeout(type, 30 + Math.random() * 30);
+                    } else {
+                        deleting = !deleting;
+                        if (!deleting) phraseIdx = (phraseIdx + 1) % phrases.length;
+                        paused = true;
+                        setTimeout(type, 500);
+                    }
                 }
-            });
-
-            function fallbackCopy(text, cb) {
-                const ta = document.createElement('textarea');
-                ta.value = text;
-                ta.style.position = 'fixed';
-                ta.style.opacity = '0';
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-                cb();
+                setTimeout(type, 1000);
             }
-        }
 
-        function initNewYearTimer() {
-            const daysEl = document.getElementById('days');
-            const hoursEl = document.getElementById('hours');
-            const minutesEl = document.getElementById('minutes');
-            const secondsEl = document.getElementById('seconds');
-
-            function update() {
-                const now = new Date();
-                const newYear = new Date(now.getFullYear() + 1, 0, 1);
-                const diff = newYear - now;
-                daysEl.textContent = String(Math.floor(diff / 86400000)).padStart(2, '0');
-                hoursEl.textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-                minutesEl.textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-                secondsEl.textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+            function initCopyWallet() {
+                const box = $('#walletBox');
+                const full = 'UQBix5YrlgWgBpfv2Q1uUav2GDv_b1JxoB9l9rwdRulJb2DN';
+                box.addEventListener('click', () => {
+                    const done = () => { box.classList.add('copied'); setTimeout(() => box.classList.remove('copied'), 300); };
+                    if (navigator.clipboard?.writeText) {
+                        navigator.clipboard.writeText(full).then(done).catch(() => fallbackCopy(full, done));
+                    } else fallbackCopy(full, done);
+                });
+                function fallbackCopy(text, cb) {
+                    const ta = document.createElement('textarea');
+                    ta.value = text;
+                    ta.style.position = 'fixed';
+                    ta.style.opacity = '0';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(ta);
+                    cb();
+                }
             }
-            update();
-            setInterval(update, 1000);
-        }
 
-        function initVideoBackground() {
-            const bgVid = document.querySelector('.new-year-video-bg');
-            if (bgVid) bgVid.playbackRate = 0.7;
-            const avVid = document.querySelector('.avatar');
-            if (avVid) avVid.playbackRate = 1.0;
-        }
+            function initNewYearTimer() {
+                const daysEl = $('#days'), hoursEl = $('#hours'), minutesEl = $('#minutes'), secondsEl = $('#seconds');
+                function update() {
+                    const now = Date.now();
+                    const newYear = new Date(new Date().getFullYear() + 1, 0, 1).getTime();
+                    const diff = newYear - now;
+                    daysEl.textContent = String(Math.floor(diff / 86400000)).padStart(2, '0');
+                    hoursEl.textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+                    minutesEl.textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+                    secondsEl.textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+                }
+                update();
+                setInterval(update, 1000);
+            }
 
-        function initScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.section').forEach(s => observer.observe(s));
-        }
+            function initVideoBackground() {
+                const bgVid = $('.new-year-video-bg');
+                if (bgVid) bgVid.playbackRate = 0.7;
+                const avVid = $('.avatar');
+                if (avVid) avVid.playbackRate = 1.0;
+            }
 
-        function initScrollIndicator() {
-            const indicator = document.getElementById('scrollIndicator');
-            window.addEventListener('scroll', () => {
-                indicator.classList.toggle('visible', window.pageYOffset > 300);
+            function initScrollAnimations() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+                }, { threshold: 0.1 });
+                $$('.section').forEach(s => observer.observe(s));
+            }
+
+            function initScrollIndicator() {
+                const indicator = $('#scrollIndicator');
+                window.addEventListener('scroll', () => indicator.classList.toggle('visible', window.pageYOffset > 300));
+                indicator.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            }
+
+            function showCookieBannerIfNeeded() {
+                if (localStorage.getItem('cookiesAccepted') !== null) return;
+                const banner = $('#cookieBanner');
+                if (banner) banner.style.display = 'flex';
+            }
+
+            function initCookieBanner() {
+                const banner = $('#cookieBanner');
+                if (!banner) return;
+                if (localStorage.getItem('cookiesAccepted') !== null) {
+                    banner.style.display = 'none';
+                    return;
+                }
+                const hide = () => {
+                    banner.style.display = 'none';
+                    localStorage.setItem('cookiesAccepted', 'true');
+                };
+                $('#acceptCookies').addEventListener('click', hide);
+                $('#declineCookies').addEventListener('click', () => {
+                    banner.style.display = 'none';
+                    localStorage.setItem('cookiesAccepted', 'false');
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                initSnow();
+                initGreeting();
+                initTypewriter();
+                initCopyWallet();
+                initScrollIndicator();
+                initNewYearTimer();
+                initScrollAnimations();
+                initVideoBackground();
+                initCookieBanner();
             });
-            indicator.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-        }
+        })();
     </script>
 </body>
 </html>
